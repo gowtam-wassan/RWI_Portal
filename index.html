@@ -289,11 +289,11 @@ legend.onAdd = function () {
     div.innerHTML = `
         <div style="font-weight:bold; margin-bottom: 6px; text-transform: uppercase; color: #a3a3a3; font-size: 10px; tracking: 0.05em;">Classification</div>
         <div style="display:flex; align-items:center; margin-bottom: 4px;">
-            <div style="width:12px; height:12px; background-color: #10b981; border-radius:3px; margin-right:8px; border: 1px solid white;"></div>
+            <div style="width:12px; height:12px; background-color: #6366f1; border-radius:3px; margin-right:8px; border: 1px solid white;"></div>
             <span>Natural Farming (NF)</span>
         </div>
         <div style="display:flex; align-items:center; margin-bottom: 4px;">
-            <div style="width:12px; height:12px; background-color: #f59e0b; border-radius:3px; margin-right:8px; border: 1px solid white;"></div>
+            <div style="width:12px; height:12px; background-color: #eab308; border-radius:3px; margin-right:8px; border: 1px solid white;"></div>
             <span>Fallow Land</span>
         </div>
         <div style="display:flex; align-items:center; margin-bottom: 4px;">
@@ -815,8 +815,8 @@ function styleFeature(feature) {
             // Highlight active matched plots
             if (props.Activity === 'NF') {
                 return {
-                    color: '#10b981',      // Emerald Green border
-                    fillColor: '#10b981',  // Emerald Green fill
+                    color: '#6366f1',      // Indigo border
+                    fillColor: '#6366f1',  // Indigo fill
                     fill: true,            // Explicitly enable fill override
                     weight: 2,
                     opacity: 0.9,
@@ -824,8 +824,8 @@ function styleFeature(feature) {
                 };
             } else if (props.Activity === 'Fallow') {
                 return {
-                    color: '#d97706',      // Darker gold border
-                    fillColor: '#f59e0b',  // Gold/Amber fill
+                    color: '#c29003',      // Darker gold border
+                    fillColor: '#eab308',  // Gold fill
                     fill: true,            // Explicitly enable fill override
                     weight: 2,
                     opacity: 0.9,
@@ -960,7 +960,7 @@ function createPopupContent(props) {
         `;
     }
 
-    const badgeColorClass = props.Activity === 'NF' ? 'text-green-400 bg-green-500/10 border-green-500/20' : 'text-amber-400 bg-amber-500/10 border-amber-500/20';
+    const badgeColorClass = props.Activity === 'NF' ? 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20' : 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20';
     const badgeText = props.Activity === 'NF' ? 'Natural Farming (NF)' : 'Fallow Land';
 
     return `
@@ -1133,8 +1133,8 @@ function displayAttributes(props) {
 
     // Standard matching attributes display card
     const badgeColor = props.Activity === 'NF' 
-        ? 'text-green-400 bg-green-500/10 border-green-500/20' 
-        : 'text-amber-400 bg-amber-500/10 border-amber-500/20';
+        ? 'text-indigo-400 bg-indigo-500/10 border-indigo-500/20' 
+        : 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20';
 
     attributePanel.innerHTML = `
         <div class="w-full text-left space-y-2.5 animate-fadeIn">
@@ -1177,8 +1177,8 @@ function displayAttributes(props) {
             
             <div class="mt-2 text-center p-2 rounded-xl border ${badgeColor} flex items-center justify-center space-x-1.5">
                 <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${props.Activity === 'NF' ? 'bg-green-400' : 'bg-amber-400'}"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 ${props.Activity === 'NF' ? 'bg-green-500' : 'bg-amber-500'}"></span>
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${props.Activity === 'NF' ? 'bg-indigo-400' : 'bg-yellow-400'}"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 ${props.Activity === 'NF' ? 'bg-indigo-500' : 'bg-yellow-500'}"></span>
                 </span>
                 <span class="text-[10px] font-extrabold uppercase tracking-widest">${props.Activity === 'NF' ? 'Natural Farming (NF)' : 'Fallow Land'}</span>
             </div>
