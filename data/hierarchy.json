@@ -1,77 +1,18 @@
 {
-  "TIMBAKTU": {
+  "RIDS": {
     "Andhra Pradesh": {
-      "Sri Sathya Sai": {
-        "Ramagiri": {
-          "Kuntimaddi": {
-            "geojson": "TIMBAKTU_kuntimaddi.geojson",
+      "Anantapur": {
+        "Pamidi": {
+          "Palyam": {
+            "geojson": "RIDS_palyam.geojson",
             "villages": {
-              "Sheshampalli": {
+              "Palyam": {
                 "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Peruru": {
-            "geojson": "TIMBAKTU_peruru.geojson",
-            "villages": {
-              "Dubbarlapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
                   "Mono": {
                     "crop_activities": {
-                      "NF Operations": {
+                      "Harvesting": {
                         "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Ramagiri": {
-            "geojson": "TIMBAKTU_ramagiri.geojson",
-            "villages": {
-              "Ramagiri": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Polepalli": {
-            "geojson": "TIMBAKTU_polepalli.geojson",
-            "villages": {
-              "Polepalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
+                      },
                       "NF Operations": {
                         "inputs": [
                           "Dravajeevamrutham"
@@ -80,71 +21,12 @@
                     }
                   }
                 }
-              }
-            }
-          }
-        },
-        "Chennekothapalli": {
-          "Mustikovela": {
-            "geojson": "TIMBAKTU_mustikovela.geojson",
-            "villages": {
-              "Guvvalagondipalli": {
+              },
+              "Appajipeta": {
                 "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
                   "Mono": {
                     "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Mustikovela": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Subbarayunipalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Kanumukkala": {
-            "geojson": "TIMBAKTU_kanumukkala.geojson",
-            "villages": {
-              "Kanumukkala": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
+                      "Harvesting": {
                         "inputs": []
                       }
                     }
@@ -154,186 +36,6 @@
             }
           }
         },
-        "Roddam": {
-          "Dodagatta": {
-            "geojson": "TIMBAKTU_dodagatta.geojson",
-            "villages": {
-              "Dodagatta": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Kambalapalli": {
-            "geojson": "TIMBAKTU_kambalapalli.geojson",
-            "villages": {
-              "Shyapuram": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Beedanapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Kambalapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Cherukuru": {
-            "geojson": "TIMBAKTU_cherukuru.geojson",
-            "villages": {
-              "Cherukuru": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Roddam": {
-            "geojson": "TIMBAKTU_roddam.geojson",
-            "villages": {
-              "Pedakodipalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Kogira": {
-            "geojson": "TIMBAKTU_kogira.geojson",
-            "villages": {
-              "Kogira": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Talupula": {
-          "Kurli": {
-            "geojson": "TIMBAKTU_kurli.geojson",
-            "villages": {
-              "Kurli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                },
-                "Fallow": {
-                  "Poly": {
-                    "crop_activities": {}
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Chennekothapalle": {
-          "Mustikovela": {
-            "geojson": "TIMBAKTU_mustikovela.geojson",
-            "villages": {
-              "Subbarayunipalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                },
-                "Fallow": {
-                  "Mono": {
-                    "crop_activities": {}
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "RIDS": {
-    "Andhra Pradesh": {
-      "Anantapur": {
         "Garladinne": {
           "Koppalakonda": {
             "geojson": "RIDS_koppalakonda.geojson",
@@ -342,144 +44,14 @@
                 "NF": {
                   "Mono": {
                     "crop_activities": {
+                      "Harvesting": {
+                        "inputs": []
+                      },
                       "NF Operations": {
                         "inputs": [
                           "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
                           "Neemasthram",
-                          "Dasaparnika",
-                          "Agniasthram"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Sirivaram": {
-            "geojson": "RIDS_sirivaram.geojson",
-            "villages": {
-              "Sirivaram": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
                           "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "PMDS": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Guddalapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Kanampalli": {
-            "geojson": "RIDS_kanampalli.geojson",
-            "villages": {
-              "Kanampalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Panta Sanjeevini",
-                          "Dasaparnika",
-                          "Egg Amino Acid"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "PMDS": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
                         ]
                       }
                     }
@@ -497,105 +69,8 @@
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Pamidi": {
-          "Palyam": {
-            "geojson": "RIDS_palyam.geojson",
-            "villages": {
-              "Palyam": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Egg Amino Acid",
-                          "Dasaparnika",
-                          "Agniasthram",
-                          "Ghanajeevamrutham",
-                          "Neemasthram",
-                          "Panta Sanjeevini"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
                           "Dravajeevamrutham"
                         ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Appajipeta": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Dasaparnika"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Katrimala": {
-            "geojson": "RIDS_katrimala.geojson",
-            "villages": {
-              "Katrimala": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram",
-                          "Dasaparnika",
-                          "Egg Amino Acid",
-                          "Ghanajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
                       }
                     }
                   }
@@ -633,40 +108,48 @@
       }
     }
   },
+  "REDS": {
+    "Andhra Pradesh": {
+      "Sri Sathya Sai": {
+        "Kadiri": {
+          "Yeguvapalli": {
+            "geojson": "REDS_yeguvapalli.geojson",
+            "villages": {
+              "Diguvapalli": {
+                "NF": {
+                  "Mono": {
+                    "crop_activities": {
+                      "NF Operations": {
+                        "inputs": [
+                          "Ghanajeevamrutham",
+                          "Dravajeevamrutham"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "WASSAN": {
     "Andhra Pradesh": {
       "Sri Sathya Sai": {
         "Nallacheruvu": {
-          "K.Pulakunta": {
-            "geojson": "WASSAN_kpulakunta.geojson",
+          "Oruvai": {
+            "geojson": "WASSAN_oruvai.geojson",
             "villages": {
-              "K.Pulakunta": {
+              "Malreddypalli": {
                 "NF": {
                   "Poly": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
-                          "Dravajeevamrutham",
-                          "Dasaparnika",
-                          "Ghanajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
                           "Ghanajeevamrutham",
-                          "Neemasthram",
-                          "Agniasthram",
-                          "Dasaparnika",
-                          "Panta Sanjeevini",
-                          "Egg Amino Acid"
+                          "Dravajeevamrutham"
                         ]
                       }
                     }
@@ -678,93 +161,11 @@
                       }
                     }
                   }
-                },
-                "Fallow": {
-                  "Mono": {
-                    "crop_activities": {}
-                  },
-                  "Poly": {
-                    "crop_activities": {}
-                  }
-                }
-              },
-              "Damavandlapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Oruvai": {
-            "geojson": "WASSAN_oruvai.geojson",
-            "villages": {
-              "Oruvai": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram",
-                          "Ghanajeevamrutham",
-                          "Dasaparnika"
-                        ]
-                      }
-                    }
-                  }
                 }
               },
               "Kummaravandlapalli": {
                 "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram",
-                          "Dasaparnika",
-                          "Egg Amino Acid"
-                        ]
-                      }
-                    }
-                  },
                   "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram",
-                          "Dasaparnika",
-                          "Ghanajeevamrutham",
-                          "Agniasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Bodinepalli": {
-                "NF": {
-                  "Mono": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
@@ -773,15 +174,12 @@
                       }
                     }
                   },
-                  "Poly": {
+                  "Mono": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
                           "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Neemasthram",
-                          "Dasaparnika",
-                          "Agniasthram"
+                          "Neemasthram"
                         ]
                       }
                     }
@@ -792,42 +190,6 @@
                 "NF": {
                   "Mono": {
                     "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Marisettipalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      },
                       "Harvesting": {
                         "inputs": []
                       }
@@ -837,38 +199,7 @@
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Gaddameedapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram",
-                          "Dasaparnika",
-                          "Ghanajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Dasaparnika",
-                          "Neemasthram"
+                          "Dravajeevamrutham"
                         ]
                       }
                     }
@@ -882,45 +213,22 @@
                       "NF Operations": {
                         "inputs": [
                           "Dravajeevamrutham",
-                          "Neemasthram",
-                          "Ghanajeevamrutham",
-                          "Egg Amino Acid"
+                          "Neemasthram"
                         ]
                       }
                     }
                   }
                 }
               },
-              "Malreddypalli": {
+              "Bodinepalli": {
                 "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
                   "Poly": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
                           "Dravajeevamrutham",
                           "Neemasthram",
-                          "Dasaparnika",
-                          "Ghanajeevamrutham",
-                          "Panta Sanjeevini"
-                        ]
-                      }
-                    }
-                  },
-                  "PMDS": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham"
+                          "Dasaparnika"
                         ]
                       }
                     }
@@ -929,25 +237,21 @@
               }
             }
           },
-          "Ubicherla": {
-            "geojson": "WASSAN_ubicherla.geojson",
+          "K.Pulakunta": {
+            "geojson": "WASSAN_kpulakunta.geojson",
             "villages": {
-              "Gorlavandla Palli": {
+              "Damavandlapalli": {
                 "NF": {
-                  "Poly": {
+                  "Mono": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
-                          "Dasaparnika",
                           "Dravajeevamrutham"
                         ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
                       }
                     }
                   },
-                  "Mono": {
+                  "Poly": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
@@ -958,70 +262,24 @@
                   }
                 }
               },
-              "Gorantlvari Palli": {
+              "K.Pulakunta": {
                 "NF": {
                   "Mono": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
+                          "Ghanajeevamrutham"
                         ]
                       }
                     }
                   }
-                }
-              },
-              "Ubicherla": {
-                "NF": {
+                },
+                "Fallow": {
                   "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham",
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "PMDS": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
+                    "crop_activities": {}
                   },
                   "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham",
-                          "Dravajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Harijanawada": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
+                    "crop_activities": {}
                   }
                 }
               }
@@ -1033,17 +291,6 @@
             "geojson": "WASSAN_kurli.geojson",
             "villages": {
               "Kurli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                },
                 "Fallow": {
                   "PMDS": {
                     "crop_activities": {}
@@ -1073,1511 +320,43 @@
       }
     }
   },
-  "APMAS": {
-    "Andhra Pradesh": {
-      "Annamayya": {
-        "Kurabalakota": {
-          "Yeraballi": {
-            "geojson": "APMAS_yeraballi.geojson",
-            "villages": {
-              "Balakavaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Diguvachennamarri": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Singannagaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Yerraballi": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Kantevaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Eguvachennamarri": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Regada": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Kanasanivaripalli": {
-            "geojson": "APMAS_kanasanivaripalli.geojson",
-            "villages": {
-              "Harajanawada": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Diguvapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Thettu": {
-            "geojson": "APMAS_thettu.geojson",
-            "villages": {
-              "Mandyamvaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Murthinayanapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Gopannavaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Galetivaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Nagalapuram": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Erraballi": {
-            "geojson": "APMAS_erraballi.geojson",
-            "villages": {
-              "Balakavaripalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Kurabalakota": {
-            "geojson": "APMAS_kurabalakota.geojson",
-            "villages": {
-              "Eguvaboyapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Bysanivaripalle": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Maddireddigaripalle": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Pagadalavaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Kanasanavaripalli": {
-            "geojson": "APMAS_kanasanavaripalli.geojson",
-            "villages": {
-              "Nallagutlapalli Hw": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Jangavaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Chinthamakulapalli": {
-            "geojson": "APMAS_chinthamakulapalli.geojson",
-            "villages": {
-              "Lakkinepalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham",
-                          "Dravajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Madanapalle": {
-          "Penchupadu": {
-            "geojson": "APMAS_penchupadu.geojson",
-            "villages": {
-              "Pandivaripalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Panasamanukunta": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Guttavaripalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Penchupadu": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Kattubhavi": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Chinnathippasamudram": {
-            "geojson": "APMAS_chinnathippasamudram.geojson",
-            "villages": {
-              "Kothakurakulavaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Regadagollapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "PMDS": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Dubbiganipalli": {
-            "geojson": "APMAS_dubbiganipalli.geojson",
-            "villages": {
-              "Enumulavaripalle": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Gollapalle": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Pothapolu": {
-            "geojson": "APMAS_pothapolu.geojson",
-            "villages": {
-              "Mallaiahdevaripalle": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Kothavaripalli": {
-            "geojson": "APMAS_kothavaripalli.geojson",
-            "villages": {
-              "Poolavandlapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Kothavaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Malepadu": {
-            "geojson": "APMAS_malepadu.geojson",
-            "villages": {
-              "Malepadu": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Krishnapuram": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Devalampalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Ponnetipalem": {
-            "geojson": "APMAS_ponnetipalem.geojson",
-            "villages": {
-              "Panasamakulapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham",
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Kollabylu": {
-            "geojson": "APMAS_kollabylu.geojson",
-            "villages": {
-              "Diguva Mamidigumpulapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Kollabylu": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Siriguntalapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Ctm Cross": {
-            "geojson": "APMAS_ctmcross.geojson",
-            "villages": {
-              "Chilakavaripalle": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "REDS": {
+  "TIMBAKTU": {
     "Andhra Pradesh": {
       "Sri Sathya Sai": {
-        "Kadiri": {
-          "Yeguvapalli": {
-            "geojson": "REDS_yeguvapalli.geojson",
+        "Chennekothapalle": {
+          "Mustikovela": {
+            "geojson": "TIMBAKTU_mustikovela.geojson",
             "villages": {
-              "Diguvapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Agniasthram",
-                          "Dasaparnika"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Agniasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Bageerathapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Agniasthram",
-                          "Dasaparnika",
-                          "Egg Amino Acid"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Agniasthram",
-                          "Panta Sanjeevini",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Yeguvapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Dasaparnika",
-                          "Neemasthram",
-                          "Agniasthram"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Panta Sanjeevini",
-                          "Dasaparnika",
-                          "Neemasthram",
-                          "Agniasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Nallamada": {
-          "Donnikota": {
-            "geojson": "REDS_donnikota.geojson",
-            "villages": {
-              "Donnikota": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham",
-                          "Dravajeevamrutham",
-                          "Neemasthram",
-                          "Agniasthram",
-                          "Dasaparnika"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Dasaparnika",
-                          "Agniasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Godamekalapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Agniasthram",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Agniasthram",
-                          "Dasaparnika"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Nallacheruvu": {
-          "K.Pulakunta": {
-            "geojson": "REDS_kpulakunta.geojson",
-            "villages": {
-              "Damavandlapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Tanakal": {
-          "Malreddipalli": {
-            "geojson": "REDS_malreddipalli.geojson",
-            "villages": {
-              "Yarraguntapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "JJ": {
-    "Andhra Pradesh": {
-      "Sri Sathya Sai": {
-        "Tanakal": {
-          "Tavalam": {
-            "geojson": "JJ_tavalam.geojson",
-            "villages": {
-              "Raginepalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Marpurivaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Kuramalapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Malreddipalli": {
-            "geojson": "JJ_malreddipalli.geojson",
-            "villages": {
-              "Oddumoravapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Peddapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Nakkarallathanda": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Nadimikuntapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
               "Subbarayunipalli": {
                 "NF": {
                   "Poly": {
                     "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
                       "NF Operations": {
                         "inputs": [
                           "Dravajeevamrutham",
-                          "Neemasthram"
+                          "Ghanajeevamrutham"
                         ]
                       }
                     }
                   }
-                }
-              },
-              "Mallreddipalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Yarraguntapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  },
+                },
+                "Fallow": {
                   "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Yarraballi": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Goundlapalli": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Gemenaikthanda": {
-            "geojson": "JJ_gemenaikthanda.geojson",
-            "villages": {
-              "Mc Thanda": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Gemenaikthanda": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              },
-              "Ramlanaikthanda": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Chikatimanipalli": {
-            "geojson": "JJ_chikatimanipalli.geojson",
-            "villages": {
-              "Peddayaddulavaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "Harvesting": {
-                        "inputs": []
-                      },
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
+                    "crop_activities": {}
                   }
                 }
               }
             }
           }
         },
-        "Tanakallu": {
-          "Tavalam": {
-            "geojson": "JJ_tavalam.geojson",
+        "Talupula": {
+          "Kurli": {
+            "geojson": "TIMBAKTU_kurli.geojson",
             "villages": {
-              "Raginepalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Kuramalapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Marpurivaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Gemenaikthanda": {
-            "geojson": "JJ_gemenaikthanda.geojson",
-            "villages": {
-              "Mc Thanda": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Gemenaikthanda": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Ramlanaikthanda": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Other": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Chikatimanipalli": {
-            "geojson": "JJ_chikatimanipalli.geojson",
-            "villages": {
-              "Peddayaddulavaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Malreddipalli": {
-            "geojson": "JJ_malreddipalli.geojson",
-            "villages": {
-              "Peddapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Nakkarallathanda": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Nadimikuntapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Voddumoravapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Subbarayunipalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Malreddipalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Yarraguntapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Goundlapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Yarraballi": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
+              "Kurli": {
+                "Fallow": {
+                  "Poly": {
+                    "crop_activities": {}
                   }
                 }
               }
@@ -2591,72 +370,10 @@
     "Andhra Pradesh": {
       "Sri Sathya Sai": {
         "Talupula": {
-          "Udumalakurthi": {
-            "geojson": "CSA_udumalakurthi.geojson",
-            "villages": {
-              "Udumalakurthi": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Somalavandlapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Ghanajeevamrutham"
-                        ]
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
           "Kurli": {
             "geojson": "CSA_kurli.geojson",
             "villages": {
               "Kurli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham",
-                          "Neemasthram"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                },
                 "Fallow": {
                   "Poly": {
                     "crop_activities": {}
@@ -2666,101 +383,6 @@
                   },
                   "Mono": {
                     "crop_activities": {}
-                  }
-                }
-              }
-            }
-          },
-          "Gollapalli Thanda": {
-            "geojson": "CSA_gollapallithanda.geojson",
-            "villages": {
-              "Gollapalli Thanda": {
-                "NF": {
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dasaparnika",
-                          "Agniasthram"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "PMDS": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Yepulapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Odulapalli": {
-            "geojson": "CSA_odulapalli.geojson",
-            "villages": {
-              "Odulapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Agniasthram",
-                          "Dravajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "Poly": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dasaparnika",
-                          "Neemasthram",
-                          "Agniasthram",
-                          "Egg Amino Acid",
-                          "Dravajeevamrutham",
-                          "Ghanajeevamrutham"
-                        ]
-                      },
-                      "Harvesting": {
-                        "inputs": []
-                      }
-                    }
-                  },
-                  "PMDS": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
                   }
                 }
               }
@@ -2775,164 +397,6 @@
                 "Fallow": {
                   "Mono": {
                     "crop_activities": {}
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "FES": {
-    "Andhra Pradesh": {
-      "Sri Sathya Sai": {
-        "Gandlapenta": {
-          "Thupalli": {
-            "geojson": "FES_thupalli.geojson",
-            "villages": {
-              "Katakamvaaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Thupalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Thummalabhailu": {
-            "geojson": "FES_thummalabhailu.geojson",
-            "villages": {
-              "Pothinepalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Chamalagondi": {
-            "geojson": "FES_chamalagondi.geojson",
-            "villages": {
-              "Bayareddyvaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Reddyvaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Gajulavari Palli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Singaanivaaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "Gandlapenta": {
-            "geojson": "FES_gandlapenta.geojson",
-            "villages": {
-              "Pothavandlapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Nayanivaaripalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              },
-              "Vaddireddypalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": []
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "Nallacheruvu": {
-          "K.Pulakunta": {
-            "geojson": "FES_kpulakunta.geojson",
-            "villages": {
-              "Damavandlapalli": {
-                "NF": {
-                  "Mono": {
-                    "crop_activities": {
-                      "NF Operations": {
-                        "inputs": [
-                          "Dravajeevamrutham"
-                        ]
-                      }
-                    }
                   }
                 }
               }
