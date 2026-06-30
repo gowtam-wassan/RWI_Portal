@@ -5,6 +5,12 @@
         "Ramagiri": {
           "Kuntimaddi": {
             "geojson": "TIMBAKTU_kuntimaddi.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly"
+            ],
             "villages": {
               "Sheshampalli": {
                 "NF": {
@@ -21,6 +27,13 @@
           },
           "Peruru": {
             "geojson": "TIMBAKTU_peruru.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Dubbarlapalli": {
                 "NF": {
@@ -44,6 +57,12 @@
           },
           "Ramagiri": {
             "geojson": "TIMBAKTU_ramagiri.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly"
+            ],
             "villages": {
               "Ramagiri": {
                 "NF": {
@@ -60,6 +79,14 @@
           },
           "Polepalli": {
             "geojson": "TIMBAKTU_polepalli.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Polepalli": {
                 "NF": {
@@ -87,6 +114,14 @@
         "Chennekothapalle": {
           "Mustikovela": {
             "geojson": "TIMBAKTU_mustikovela.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Guvvalagondipalli": {
                 "NF": {
@@ -147,6 +182,12 @@
           },
           "Kanumukkala": {
             "geojson": "TIMBAKTU_kanumukkala.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly"
+            ],
             "villages": {
               "Kanumukkala": {
                 "NF": {
@@ -165,6 +206,12 @@
         "Roddam": {
           "Dodagatta": {
             "geojson": "TIMBAKTU_dodagatta.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly"
+            ],
             "villages": {
               "Dodagatta": {
                 "NF": {
@@ -181,6 +228,13 @@
           },
           "Kambalapalli": {
             "geojson": "TIMBAKTU_kambalapalli.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Shyapuram": {
                 "NF": {
@@ -226,6 +280,14 @@
           },
           "Cherukuru": {
             "geojson": "TIMBAKTU_cherukuru.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Cherukuru": {
                 "NF": {
@@ -249,6 +311,12 @@
           },
           "Roddam": {
             "geojson": "TIMBAKTU_roddam.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly"
+            ],
             "villages": {
               "Pedakodipalli": {
                 "NF": {
@@ -265,6 +333,14 @@
           },
           "Kogira": {
             "geojson": "TIMBAKTU_kogira.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Kogira": {
                 "NF": {
@@ -290,6 +366,12 @@
         "Talupula": {
           "Kurli": {
             "geojson": "TIMBAKTU_kurli.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly"
+            ],
             "villages": {
               "Kurli": {
                 "Fallow": {
@@ -310,6 +392,16 @@
         "Garladinne": {
           "Koppalakonda": {
             "geojson": "RIDS_koppalakonda.geojson",
+            "seasons": [
+              "Perennial",
+              "Rabi",
+              "Kharif",
+              "Kharif & Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Koppalakonda": {
                 "NF": {
@@ -342,6 +434,17 @@
           },
           "Sirivaram": {
             "geojson": "RIDS_sirivaram.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi",
+              "Perennial",
+              "Kharif & Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly",
+              "PMDS"
+            ],
             "villages": {
               "Sirivaram": {
                 "NF": {
@@ -414,6 +517,18 @@
           },
           "Kanampalli": {
             "geojson": "RIDS_kanampalli.geojson",
+            "seasons": [
+              "Kharif",
+              "Perennial",
+              "Kharf",
+              "Kharif & Rabi",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly",
+              "PMDS"
+            ],
             "villages": {
               "Kanampalli": {
                 "NF": {
@@ -463,6 +578,16 @@
           },
           "Kesavapuram": {
             "geojson": "RIDS_kesavapuram.geojson",
+            "seasons": [
+              "Kharif & Rabi",
+              "Kharif",
+              "Perennial",
+              "Summer",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Kesavapuram": {
                 "NF": {
@@ -487,6 +612,16 @@
         "Pamidi": {
           "Palyam": {
             "geojson": "RIDS_palyam.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi",
+              "Perennial",
+              "Kharif & Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Palyam": {
                 "NF": {
@@ -540,6 +675,14 @@
           },
           "Katrimala": {
             "geojson": "RIDS_katrimala.geojson",
+            "seasons": [
+              "Kharif",
+              "Perennial"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Katrimala": {
                 "NF": {
@@ -580,6 +723,12 @@
         "Ramagiri": {
           "Shyapuram": {
             "geojson": "RIDS_shyapuram.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Other": {
                 "Fallow": {
@@ -592,6 +741,12 @@
           },
           "Ramagiri": {
             "geojson": "RIDS_ramagiri.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Other": {
                 "Fallow": {
@@ -612,16 +767,26 @@
         "Nallacheruvu": {
           "K.Pulakunta": {
             "geojson": "WASSAN_kpulakunta.geojson",
+            "seasons": [
+              "Rabi",
+              "Kharif",
+              "Perennial"
+            ],
+            "crop_types": [
+              "Model Crop",
+              "Mono",
+              "Poly",
+              "PMDS"
+            ],
             "villages": {
               "K.Pulakunta": {
                 "NF": {
-                  "Poly": {
+                  "Model Crop": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
                           "Dravajeevamrutham",
-                          "Dasaparnika",
-                          "Ghanajeevamrutham"
+                          "Dasaparnika"
                         ]
                       },
                       "Harvesting": {
@@ -640,6 +805,17 @@
                           "Dasaparnika",
                           "Panta Sanjeevini",
                           "Egg Amino Acid"
+                        ]
+                      }
+                    }
+                  },
+                  "Poly": {
+                    "crop_activities": {
+                      "NF Operations": {
+                        "inputs": [
+                          "Dravajeevamrutham",
+                          "Dasaparnika",
+                          "Ghanajeevamrutham"
                         ]
                       }
                     }
@@ -689,17 +865,39 @@
           },
           "Oruvai": {
             "geojson": "WASSAN_oruvai.geojson",
+            "seasons": [
+              "Rabi",
+              "Kharif",
+              "Perennial",
+              "Summer"
+            ],
+            "crop_types": [
+              "Model Crop",
+              "Mono",
+              "Poly",
+              "PMDS"
+            ],
             "villages": {
               "Oruvai": {
                 "NF": {
+                  "Model Crop": {
+                    "crop_activities": {
+                      "NF Operations": {
+                        "inputs": [
+                          "Dravajeevamrutham",
+                          "Neemasthram"
+                        ]
+                      }
+                    }
+                  },
                   "Poly": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
                           "Dravajeevamrutham",
-                          "Neemasthram",
                           "Ghanajeevamrutham",
-                          "Dasaparnika"
+                          "Dasaparnika",
+                          "Neemasthram"
                         ]
                       }
                     }
@@ -720,7 +918,7 @@
                       }
                     }
                   },
-                  "Poly": {
+                  "Model Crop": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
@@ -746,7 +944,7 @@
                       }
                     }
                   },
-                  "Poly": {
+                  "Model Crop": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
@@ -756,6 +954,13 @@
                           "Dasaparnika",
                           "Agniasthram"
                         ]
+                      }
+                    }
+                  },
+                  "Poly": {
+                    "crop_activities": {
+                      "NF Operations": {
+                        "inputs": []
                       }
                     }
                   }
@@ -786,6 +991,13 @@
                           "Dravajeevamrutham",
                           "Ghanajeevamrutham"
                         ]
+                      }
+                    }
+                  },
+                  "Model Crop": {
+                    "crop_activities": {
+                      "NF Operations": {
+                        "inputs": []
                       }
                     }
                   }
@@ -820,7 +1032,7 @@
               },
               "Gaddameedapalli": {
                 "NF": {
-                  "Poly": {
+                  "Model Crop": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
@@ -845,11 +1057,32 @@
                         ]
                       }
                     }
+                  },
+                  "Poly": {
+                    "crop_activities": {
+                      "NF Operations": {
+                        "inputs": [
+                          "Dravajeevamrutham",
+                          "Neemasthram"
+                        ]
+                      }
+                    }
                   }
                 }
               },
               "Pallevandlapalli": {
                 "NF": {
+                  "Model Crop": {
+                    "crop_activities": {
+                      "NF Operations": {
+                        "inputs": [
+                          "Dravajeevamrutham",
+                          "Neemasthram",
+                          "Ghanajeevamrutham"
+                        ]
+                      }
+                    }
+                  },
                   "Poly": {
                     "crop_activities": {
                       "NF Operations": {
@@ -873,7 +1106,7 @@
                       }
                     }
                   },
-                  "Poly": {
+                  "Model Crop": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
@@ -904,19 +1137,38 @@
           },
           "Ubicherla": {
             "geojson": "WASSAN_ubicherla.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Model Crop",
+              "Poly",
+              "Mono",
+              "PMDS"
+            ],
             "villages": {
               "Gorlavandla Palli": {
                 "NF": {
-                  "Poly": {
+                  "Model Crop": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
                           "Dasaparnika",
                           "Dravajeevamrutham"
                         ]
-                      },
+                      }
+                    }
+                  },
+                  "Poly": {
+                    "crop_activities": {
                       "Harvesting": {
                         "inputs": []
+                      },
+                      "NF Operations": {
+                        "inputs": [
+                          "Dravajeevamrutham"
+                        ]
                       }
                     }
                   },
@@ -942,7 +1194,7 @@
                       }
                     }
                   },
-                  "Poly": {
+                  "Model Crop": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
@@ -972,15 +1224,22 @@
                       }
                     }
                   },
-                  "Poly": {
+                  "Model Crop": {
                     "crop_activities": {
                       "NF Operations": {
                         "inputs": [
                           "Ghanajeevamrutham",
                           "Dravajeevamrutham"
                         ]
-                      },
+                      }
+                    }
+                  },
+                  "Poly": {
+                    "crop_activities": {
                       "Harvesting": {
+                        "inputs": []
+                      },
+                      "NF Operations": {
                         "inputs": []
                       }
                     }
@@ -1017,6 +1276,12 @@
         "Kurabalakota": {
           "Yeraballi": {
             "geojson": "APMAS_yeraballi.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Balakavaripalli": {
                 "NF": {
@@ -1099,6 +1364,12 @@
           },
           "Kanasanivaripalli": {
             "geojson": "APMAS_kanasanivaripalli.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Harajanawada": {
                 "NF": {
@@ -1126,6 +1397,14 @@
           },
           "Thettu": {
             "geojson": "APMAS_thettu.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Mandyamvaripalli": {
                 "NF": {
@@ -1195,6 +1474,12 @@
           },
           "Erraballi": {
             "geojson": "APMAS_erraballi.geojson",
+            "seasons": [
+              "Rabi"
+            ],
+            "crop_types": [
+              "Poly"
+            ],
             "villages": {
               "Balakavaripalli": {
                 "NF": {
@@ -1213,6 +1498,13 @@
           },
           "Kurabalakota": {
             "geojson": "APMAS_kurabalakota.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Eguvaboyapalli": {
                 "NF": {
@@ -1262,6 +1554,12 @@
           },
           "Kanasanavaripalli": {
             "geojson": "APMAS_kanasanavaripalli.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Nallagutlapalli Hw": {
                 "NF": {
@@ -1289,6 +1587,13 @@
           },
           "Chinthamakulapalli": {
             "geojson": "APMAS_chinthamakulapalli.geojson",
+            "seasons": [
+              "Rabi",
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Lakkinepalli": {
                 "NF": {
@@ -1313,6 +1618,14 @@
         "Madanapalle": {
           "Penchupadu": {
             "geojson": "APMAS_penchupadu.geojson",
+            "seasons": [
+              "Rabi",
+              "Perennial"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Pandivaripalli": {
                 "NF": {
@@ -1386,6 +1699,15 @@
           },
           "Chinnathippasamudram": {
             "geojson": "APMAS_chinnathippasamudram.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly",
+              "PMDS"
+            ],
             "villages": {
               "Kothakurakulavaripalli": {
                 "NF": {
@@ -1427,6 +1749,15 @@
           },
           "Dubbiganipalli": {
             "geojson": "APMAS_dubbiganipalli.geojson",
+            "seasons": [
+              "Rabi",
+              "Summer",
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Enumulavaripalle": {
                 "NF": {
@@ -1467,6 +1798,13 @@
           },
           "Pothapolu": {
             "geojson": "APMAS_pothapolu.geojson",
+            "seasons": [
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Mallaiahdevaripalle": {
                 "NF": {
@@ -1492,6 +1830,14 @@
           },
           "Kothavaripalli": {
             "geojson": "APMAS_kothavaripalli.geojson",
+            "seasons": [
+              "Rabi",
+              "Summer"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Poolavandlapalli": {
                 "NF": {
@@ -1521,6 +1867,14 @@
           },
           "Malepadu": {
             "geojson": "APMAS_malepadu.geojson",
+            "seasons": [
+              "Rabi",
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Malepadu": {
                 "NF": {
@@ -1563,6 +1917,14 @@
           },
           "Ponnetipalem": {
             "geojson": "APMAS_ponnetipalem.geojson",
+            "seasons": [
+              "Rabi",
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Panasamakulapalli": {
                 "NF": {
@@ -1589,6 +1951,13 @@
           },
           "Kollabylu": {
             "geojson": "APMAS_kollabylu.geojson",
+            "seasons": [
+              "Rabi"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Diguva Mamidigumpulapalli": {
                 "NF": {
@@ -1640,6 +2009,12 @@
           },
           "Ctm Cross": {
             "geojson": "APMAS_ctmcross.geojson",
+            "seasons": [
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Chilakavaripalle": {
                 "NF": {
@@ -1664,6 +2039,15 @@
         "Kadiri": {
           "Yeguvapalli": {
             "geojson": "REDS_yeguvapalli.geojson",
+            "seasons": [
+              "Kharif",
+              "Perennial",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Diguvapalli": {
                 "NF": {
@@ -1765,6 +2149,15 @@
         "Nallamada": {
           "Donnikota": {
             "geojson": "REDS_donnikota.geojson",
+            "seasons": [
+              "Rabi",
+              "Perennial",
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Donnikota": {
                 "NF": {
@@ -1835,6 +2228,14 @@
         "Tanakallu": {
           "Tavalam": {
             "geojson": "JJ_tavalam.geojson",
+            "seasons": [
+              "Rabi",
+              "Kharif"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Raginepalli": {
                 "NF": {
@@ -1927,6 +2328,14 @@
           },
           "Malreddipalli": {
             "geojson": "JJ_malreddipalli.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Oddumoravapalli": {
                 "NF": {
@@ -2192,6 +2601,14 @@
           },
           "Gemenaikthanda": {
             "geojson": "JJ_gemenaikthanda.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono"
+            ],
             "villages": {
               "Mc Thanda": {
                 "NF": {
@@ -2292,6 +2709,14 @@
           },
           "Chikatimanipalli": {
             "geojson": "JJ_chikatimanipalli.geojson",
+            "seasons": [
+              "Rabi",
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Peddayaddulavaripalli": {
                 "NF": {
@@ -2333,6 +2758,14 @@
         "Talupula": {
           "Udumalakurthi": {
             "geojson": "CSA_udumalakurthi.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly"
+            ],
             "villages": {
               "Udumalakurthi": {
                 "NF": {
@@ -2369,6 +2802,15 @@
           },
           "Kurli": {
             "geojson": "CSA_kurli.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly",
+              "PMDS"
+            ],
             "villages": {
               "Kurli": {
                 "NF": {
@@ -2413,6 +2855,17 @@
           },
           "Gollapalli Thanda": {
             "geojson": "CSA_gollapallithanda.geojson",
+            "seasons": [
+              "Kharif",
+              "Rabi",
+              "Perennial"
+            ],
+            "crop_types": [
+              "Poly",
+              "Mono",
+              "PMDS",
+              "Model Crop"
+            ],
             "villages": {
               "Gollapalli Thanda": {
                 "NF": {
@@ -2442,6 +2895,13 @@
                         "inputs": []
                       }
                     }
+                  },
+                  "Model Crop": {
+                    "crop_activities": {
+                      "NF Operations": {
+                        "inputs": []
+                      }
+                    }
                   }
                 }
               },
@@ -2460,6 +2920,16 @@
           },
           "Odulapalli": {
             "geojson": "CSA_odulapalli.geojson",
+            "seasons": [
+              "Kharif",
+              "Perennial",
+              "Rabi"
+            ],
+            "crop_types": [
+              "Mono",
+              "Poly",
+              "PMDS"
+            ],
             "villages": {
               "Odulapalli": {
                 "NF": {
@@ -2508,6 +2978,12 @@
           },
           "Chinnapalligeojson07102025": {
             "geojson": "CSA_chinnapalligeojson07102025.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Other": {
                 "Fallow": {
@@ -2528,6 +3004,12 @@
         "Gandlapenta": {
           "Thupalli": {
             "geojson": "FES_thupalli.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Katakamvaaripalli": {
                 "NF": {
@@ -2555,6 +3037,12 @@
           },
           "Thummalabhailu": {
             "geojson": "FES_thummalabhailu.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Pothinepalli": {
                 "NF": {
@@ -2571,6 +3059,12 @@
           },
           "Chamalagondi": {
             "geojson": "FES_chamalagondi.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Bayareddyvaripalli": {
                 "NF": {
@@ -2620,6 +3114,12 @@
           },
           "Gandlapenta": {
             "geojson": "FES_gandlapenta.geojson",
+            "seasons": [
+              "Kharif"
+            ],
+            "crop_types": [
+              "Mono"
+            ],
             "villages": {
               "Pothavandlapalli": {
                 "NF": {

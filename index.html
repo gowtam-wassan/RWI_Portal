@@ -196,6 +196,14 @@
                 </div>
             </div>
 
+            <!-- Season Dropdown -->
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Season</label>
+                <select id="seasonSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer" disabled>
+                    <option value="" class="bg-dark-900">Select Season</option>
+                </select>
+            </div>
+
             <!-- Crop Type Dropdown -->
             <div>
                 <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Crop Type</label>
@@ -203,6 +211,7 @@
                     <option value="" class="bg-dark-900">Select Crop Type</option>
                 </select>
             </div>
+
 
             <!-- Crop Activity (Dynamic) -->
             <div id="cropActivityContainer" class="hidden">
@@ -310,6 +319,7 @@ const blockSelect = document.getElementById("blockSelect");
 const gpSelect = document.getElementById("gpSelect");
 const villageSelect = document.getElementById("villageSelect");
 const activitySelect = document.getElementById("activitySelect");
+const seasonSelect = document.getElementById("seasonSelect");
 const cropTypeSelect = document.getElementById("cropTypeSelect");
 const nfInputCheckboxContainer = document.getElementById("nfInputCheckboxContainer");
 
@@ -370,6 +380,7 @@ function populateNGOs() {
     resetOptions(gpSelect, "GP");
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
+    resetOptions(seasonSelect, "Season");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
     nfInputCheckboxContainer.innerHTML = "";
@@ -390,6 +401,7 @@ ngoSelect.onchange = () => {
     resetOptions(gpSelect, "GP");
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
+    resetOptions(seasonSelect, "Season");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
     nfInputCheckboxContainer.innerHTML = "";
@@ -416,6 +428,7 @@ stateSelect.onchange = () => {
     resetOptions(gpSelect, "GP");
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
+    resetOptions(seasonSelect, "Season");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
     nfInputCheckboxContainer.innerHTML = "";
@@ -428,6 +441,7 @@ districtSelect.onchange = () => {
         resetOptions(gpSelect, "GP");
         resetOptions(villageSelect, "Village");
         resetOptions(activitySelect, "Activity");
+        resetOptions(seasonSelect, "Season");
         resetOptions(cropTypeSelect, "Crop Type");
         nfInputContainer.classList.add("hidden");
         nfInputCheckboxContainer.innerHTML = "";
@@ -440,6 +454,7 @@ districtSelect.onchange = () => {
     resetOptions(gpSelect, "GP");
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
+    resetOptions(seasonSelect, "Season");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
     nfInputCheckboxContainer.innerHTML = "";
@@ -451,6 +466,7 @@ blockSelect.onchange = () => {
         resetOptions(gpSelect, "GP");
         resetOptions(villageSelect, "Village");
         resetOptions(activitySelect, "Activity");
+        resetOptions(seasonSelect, "Season");
         resetOptions(cropTypeSelect, "Crop Type");
         nfInputContainer.classList.add("hidden");
         nfInputCheckboxContainer.innerHTML = "";
@@ -462,6 +478,7 @@ blockSelect.onchange = () => {
     
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
+    resetOptions(seasonSelect, "Season");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
     nfInputCheckboxContainer.innerHTML = "";
@@ -473,6 +490,7 @@ gpSelect.onchange = () => {
         clearGeoJsonLayer();
         resetOptions(villageSelect, "Village");
         resetOptions(activitySelect, "Activity");
+        resetOptions(seasonSelect, "Season");
         resetOptions(cropTypeSelect, "Crop Type");
         nfInputContainer.classList.add("hidden");
         nfInputCheckboxContainer.innerHTML = "";
@@ -488,12 +506,14 @@ gpSelect.onchange = () => {
     const villages = Object.keys(gpData.villages).sort();
     populateSelect(villageSelect, villages, "Village");
     
-    // Populate standard Crop Type options
-    populateCropTypes();
+    // Populate Season and Crop Type from hierarchy
+    populateSeasons(gpData);
+    populateCropTypes(gpData);
     
     // Reset child selections and trigger dynamic update
     villageSelect.value = "";
     activitySelect.value = "";
+    seasonSelect.value = "";
     cropTypeSelect.value = "";
     nfInputCheckboxContainer.innerHTML = "";
     
@@ -602,8 +622,27 @@ function getAvailableActivities() {
     return Array.from(activities).sort();
 }
 
-function populateCropTypes() {
-    populateSelect(cropTypeSelect, ["Mono", "Poly", "PMDS"], "Crop Type");
+// Season trigger
+seasonSelect.onchange = () => {
+    filterAndStyleMap();
+};
+
+function populateSeasons(gpData) {
+    const seasons = (gpData && gpData.seasons) ? gpData.seasons.sort() : [];
+    if (seasons.length > 0) {
+        populateSelect(seasonSelect, seasons, "Season");
+    } else {
+        resetOptions(seasonSelect, "Season");
+    }
+}
+
+function populateCropTypes(gpData) {
+    const cts = (gpData && gpData.crop_types) ? gpData.crop_types.sort() : [];
+    if (cts.length > 0) {
+        populateSelect(cropTypeSelect, cts, "Crop Type");
+    } else {
+        populateSelect(cropTypeSelect, ["Mono", "Poly", "PMDS"], "Crop Type");
+    }
 }
 
 function getAvailableNFInputs() {
@@ -766,7 +805,8 @@ function styleFeature(feature) {
     
     // Check if any activity/crop/inputs filters are active
     const hasActivityFilter = activitySelect.value || 
-                              cropTypeSelect.value || 
+                              cropTypeSelect.value ||
+                              seasonSelect.value ||
                               (getSelectedNFInputs().length > 0);
                               
     if (hasActivityFilter) {
@@ -850,6 +890,14 @@ function matchFilters(feature) {
         const selectedCt = cropTypeSelect.value.toLowerCase();
         const cts = props['Crop Type'].toLowerCase().split(',').map(x => x.trim());
         if (!cts.includes(selectedCt)) {
+            return false;
+        }
+    }
+    // 4. Season filter
+    if (seasonSelect.value) {
+        const selectedSeason = seasonSelect.value.toLowerCase();
+        const seasons = (props['Season'] || '').toLowerCase().split(',').map(x => x.trim());
+        if (!seasons.some(s => s.includes(selectedSeason) || selectedSeason.includes(s))) {
             return false;
         }
     }
