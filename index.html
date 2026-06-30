@@ -341,7 +341,7 @@ toggleBtn.onclick = function() {
 // =============================
 // FETCH HIERARCHY & POPULATE
 // =============================
-fetch('data/hierarchy.json')
+fetch('data/hierarchy.json?v=' + Date.now())
     .then(res => res.json())
     .then(data => {
         hierarchyData = data;
@@ -756,7 +756,7 @@ function loadGPGeoJson(filename) {
         </div>
     `;
     
-    fetch('data/geojson/' + filename)
+    fetch('data/geojson/' + filename + '?v=' + Date.now())
         .then(res => res.json())
         .then(data => {
             clearGeoJsonLayer();
