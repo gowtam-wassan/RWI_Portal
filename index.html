@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>RWI Portal</title>
+
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: { sans: ['Inter', 'sans-serif'] },
+                colors: { dark: { 900: '#0a0a0a', 800: '#171717', 700: '#262626' } }
+            }
+        }
+    }
+</script>
+
+<style>
+    html, body { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Inter', sans-serif; overflow: hidden; background-color: #000; }
+    
+    /* Map Container */
+    #map {
+        position: absolute; top: 0; bottom: 0; right: 0; left: 0; z-index: 10;
+        transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    @media (min-width: 768px) {
+        .map-shifted { left: 400px !important; }
+    }
+
+    /* Glassmorphic Sidebar */
+    #sidebar {
+        position: absolute; top: 0; left: 0; width: 100%; max-width: 400px; height: 100%;
+        background: rgba(15, 15, 20, 0.90); backdrop-filter: blur(20px);
+        border-right: 1px solid rgba(255, 255, 255, 0.1); color: white;
+        z-index: 50; transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateX(0); display: flex; flex-direction: column;
+        box-shadow: 20px 0 30px -10px rgba(0, 0, 0, 0.5);
+    }
+    
+    /* Mobile safe area for toggle button */
+    @media (max-width: 768px) {
+        #sidebar { max-width: calc(100vw - 48px); }
+    }
+
+    #sidebar.collapsed { transform: translateX(-100%); box-shadow: none; }
+
+    #toggleBtn {
+        position: absolute; top: 24px; right: -48px; width: 48px; height: 48px;
+        background: rgba(15, 15, 20, 0.9); backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.1); border-left: none;
+        border-radius: 0 12px 12px 0; color: white;
+        display: flex; align-items: center; justify-content: center; cursor: pointer;
+        z-index: 60; transition: background 0.2s, transform 0.2s;
+    }
+    #toggleBtn:hover { background: rgba(30, 40, 60, 0.95); }
+    #sidebar.collapsed #toggleBtn svg { transform: rotate(180deg); }
+
+    /* Dropdown overrides for dark theme appearance */
+    select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='rgba(255,255,255,0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1.25em;
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.25); }
+
+    /* Custom Leaflet Popup */
+    .custom-leaflet-popup .leaflet-popup-content-wrapper {
+        background: rgba(15, 15, 20, 0.95) !important;
+        backdrop-filter: blur(8px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 12px !important;
+        color: white !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6) !important;
+        padding: 4px !important;
+    }
+    .custom-leaflet-popup .leaflet-popup-tip {
+        background: rgba(15, 15, 20, 0.95) !important;
+        border-left: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+    .custom-leaflet-popup .leaflet-popup-close-button {
+        color: rgba(255, 255, 255, 0.6) !important;
+        padding: 6px !important;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- Full-Screen Map Container -->
+<div id="map" class="map-shifted"></div>
+
+<!-- Sidebar -->
+<div id="sidebar">
+    <button id="toggleBtn" aria-label="Toggle Sidebar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </button>
+    
+    <!-- Scrollable Content Area -->
+    <div class="h-full w-full overflow-y-auto overflow-x-hidden p-6 pb-8 flex flex-col">
+
+        <!-- Logo & Header -->
+        <div class="mb-6 flex justify-between items-center border-b border-gray-700/50 pb-4">
+            <div class="flex items-center space-x-3">
+                <div class="inline-flex items-center justify-center p-2 rounded-lg bg-gradient-to-br from-green-500/20 to-blue-500/20 border border-green-500/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 tracking-tight">RWI Portal</h2>
+                    <p class="text-[10px] text-gray-400 mt-0.5 font-medium uppercase tracking-wider">Activity Data</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hierarchical Filters Container -->
+        <div class="space-y-4 mb-6">
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-white/5 pb-2 mb-3">Filters</h3>
+            
+            <!-- NGO Dropdown -->
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">NGO</label>
+                <select id="ngoSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer">
+                    <option value="" class="bg-dark-900">Select NGO</option>
+                </select>
+            </div>
+
+            <!-- State Dropdown -->
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">State</label>
+                <select id="stateSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer" disabled>
+                    <option value="" class="bg-dark-900">Select State</option>
+                </select>
+            </div>
+
+            <!-- District Dropdown -->
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">District</label>
+                <select id="districtSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer" disabled>
+                    <option value="" class="bg-dark-900">Select District</option>
+                </select>
+            </div>
+
+            <!-- Block Dropdown -->
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Block</label>
+                <select id="blockSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer" disabled>
+                    <option value="" class="bg-dark-900">Select Block</option>
+                </select>
+            </div>
+
+            <!-- GP Dropdown -->
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Gram Panchayat (GP)</label>
+                <select id="gpSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer" disabled>
+                    <option value="" class="bg-dark-900">Select GP</option>
+                </select>
+            </div>
+
+            <!-- Village Dropdown -->
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Village</label>
+                <select id="villageSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer" disabled>
+                    <option value="" class="bg-dark-900">Select Village</option>
+                </select>
+            </div>
+
+            <!-- Activity Dropdown -->
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Activity</label>
+                <select id="activitySelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer" disabled>
+                    <option value="" class="bg-dark-900">Select Activity</option>
+                </select>
+            </div>
+
+            <!-- NF Inputs (Dynamic) -->
+            <div id="nfInputContainer" class="hidden">
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Natural Farming Inputs</label>
+                <select id="nfInputSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer">
+                    <option value="" class="bg-dark-900">Select Input</option>
+                </select>
+            </div>
+
+            <!-- Crop Type Dropdown -->
+            <div>
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Crop Type</label>
+                <select id="cropTypeSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer" disabled>
+                    <option value="" class="bg-dark-900">Select Crop Type</option>
+                </select>
+            </div>
+
+            <!-- Crop Activity (Dynamic) -->
+            <div id="cropActivityContainer" class="hidden">
+                <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Crop Activity</label>
+                <select id="cropActivitySelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer">
+                    <option value="" class="bg-dark-900">Select Crop Activity</option>
+                </select>
+            </div>
+
+            <!-- Reset Button -->
+            <button id="resetBtn" class="w-full mt-4 py-2.5 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-xl font-bold text-xs shadow-[0_0_15px_rgba(16,185,129,0.2)] transition duration-200 transform active:scale-95 border border-emerald-500/30">
+                Reset Filters
+            </button>
+        </div>
+
+        <!-- Attribute Display Panel (Selected Geometry) -->
+        <div class="mt-auto pt-6 border-t border-gray-700/50">
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest border-b border-white/5 pb-2 mb-3">Plot Information</h3>
+            <div id="attributePanel" class="bg-black/40 border border-white/10 rounded-2xl p-4 flex flex-col items-center justify-center min-h-[160px] text-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-gray-500 mb-2 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                </svg>
+                <p class="text-xs text-gray-400 font-medium">Select a GP/Village filter and click a plot on the map to display attributes.</p>
+            </div>
+        </div>
+
+    </div> <!-- End Scrollable Wrapper -->
+</div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+// =============================
+// STATE & DATA
+// =============================
+let hierarchyData = null;
+let currentGeoJsonLayer = null;
+let selectedFeatureLayer = null;
+let gpFeatures = [];
+
+// =============================
+// MAP INITIALIZATION
+// =============================
+// Centered exactly on Sri Sathya Sai (SSS) District 
+const map = L.map('map', { zoomControl: false }).setView([14.16, 77.80], 10);
+
+const satelliteMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri World Imagery'
+});
+const osmMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Tiles &copy; OpenStreetMap'
+});
+const darkCanvas = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri'
+});
+
+// Default Satellite base layer
+satelliteMap.addTo(map);
+
+const baseMaps = {
+    "Satellite Imagery": satelliteMap,
+    "OpenStreetMap": osmMap,
+    "Dark Contrast": darkCanvas
+};
+
+L.control.zoom({ position: 'topright' }).addTo(map);
+L.control.layers(baseMaps, null, { position: 'bottomleft', collapsed: false }).addTo(map);
+
+// Add custom Legend
+const legend = L.control({position: 'bottomright'});
+legend.onAdd = function () {
+    const div = L.DomUtil.create('div', 'legend');
+    div.style.cssText = 'background: rgba(15,15,20,0.85); backdrop-filter: blur(10px); padding: 12px; border: 1px border white/10; border-radius: 12px; color: white; font-size: 11px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);';
+    div.innerHTML = `
+        <div style="font-weight:bold; margin-bottom: 6px; text-transform: uppercase; color: #a3a3a3; font-size: 10px; tracking: 0.05em;">Classification</div>
+        <div style="display:flex; align-items:center; margin-bottom: 4px;">
+            <div style="width:12px; height:12px; background-color: #10b981; border-radius:3px; margin-right:8px; border: 1px solid white;"></div>
+            <span>Natural Farming (NF)</span>
+        </div>
+        <div style="display:flex; align-items:center; margin-bottom: 4px;">
+            <div style="width:12px; height:12px; background-color: #f59e0b; border-radius:3px; margin-right:8px; border: 1px solid white;"></div>
+            <span>Fallow Land</span>
+        </div>
+        <div style="display:flex; align-items:center; margin-bottom: 4px;">
+            <div style="width:12px; height:12px; background-color: rgba(239, 68, 68, 0.45); border-radius:3px; margin-right:8px; border: 1.5px solid #ef4444;"></div>
+            <span>Selected Village Plots</span>
+        </div>
+        <div style="display:flex; align-items:center;">
+            <div style="width:12px; height:12px; background-color: #4b5563; border-radius:3px; margin-right:8px; border: 1px solid rgba(255,255,255,0.3);"></div>
+            <span>Context Plot (No Survey)</span>
+        </div>
+    `;
+    return div;
+};
+legend.addTo(map);
+
+// =============================
+// DOM ELEMENTS
+// =============================
+const ngoSelect = document.getElementById("ngoSelect");
+const stateSelect = document.getElementById("stateSelect");
+const districtSelect = document.getElementById("districtSelect");
+const blockSelect = document.getElementById("blockSelect");
+const gpSelect = document.getElementById("gpSelect");
+const villageSelect = document.getElementById("villageSelect");
+const activitySelect = document.getElementById("activitySelect");
+const cropTypeSelect = document.getElementById("cropTypeSelect");
+const nfInputSelect = document.getElementById("nfInputSelect");
+
+const nfInputContainer = document.getElementById("nfInputContainer");
+const attributePanel = document.getElementById("attributePanel");
+const resetBtn = document.getElementById("resetBtn");
+const sidebar = document.getElementById("sidebar");
+const toggleBtn = document.getElementById("toggleBtn");
+const mapDiv = document.getElementById("map");
+
+// Toggle Sidebar behavior
+toggleBtn.onclick = function() {
+    sidebar.classList.toggle("collapsed");
+    if (sidebar.classList.contains("collapsed")) mapDiv.classList.remove("map-shifted");
+    else mapDiv.classList.add("map-shifted");
+    setTimeout(() => { map.invalidateSize(); }, 400); 
+};
+
+// =============================
+// FETCH HIERARCHY & POPULATE
+// =============================
+fetch('data/hierarchy.json')
+    .then(res => res.json())
+    .then(data => {
+        hierarchyData = data;
+        populateNGOs();
+    })
+    .catch(err => {
+        console.error("Failed to load hierarchy:", err);
+        attributePanel.innerHTML = `<div class="text-red-400 text-xs font-semibold">Error: Failed to load data/hierarchy.json. Run data_prep.py first!</div>`;
+    });
+
+function resetOptions(selectEl, label) {
+    selectEl.innerHTML = `<option value="">Select ${label}</option>`;
+    selectEl.disabled = true;
+}
+
+function populateSelect(selectEl, options, label) {
+    selectEl.innerHTML = `<option value="">Select ${label}</option>`;
+    options.forEach(opt => {
+        const el = document.createElement("option");
+        el.value = opt;
+        el.className = "bg-dark-900";
+        el.innerText = opt;
+        selectEl.appendChild(el);
+    });
+    selectEl.disabled = false;
+}
+
+// 1. Populate NGOs
+function populateNGOs() {
+    const ngos = Object.keys(hierarchyData).sort();
+    populateSelect(ngoSelect, ngos, "NGO");
+    
+    resetOptions(stateSelect, "State");
+    resetOptions(districtSelect, "District");
+    resetOptions(blockSelect, "Block");
+    resetOptions(gpSelect, "GP");
+    resetOptions(villageSelect, "Village");
+    resetOptions(activitySelect, "Activity");
+    resetOptions(cropTypeSelect, "Crop Type");
+    nfInputContainer.classList.add("hidden");
+}
+
+// Event handlers
+ngoSelect.onchange = () => {
+    if (!ngoSelect.value) {
+        populateNGOs();
+        clearGeoJsonLayer();
+        return;
+    }
+    const states = Object.keys(hierarchyData[ngoSelect.value]).sort();
+    populateSelect(stateSelect, states, "State");
+    
+    resetOptions(districtSelect, "District");
+    resetOptions(blockSelect, "Block");
+    resetOptions(gpSelect, "GP");
+    resetOptions(villageSelect, "Village");
+    resetOptions(activitySelect, "Activity");
+    resetOptions(cropTypeSelect, "Crop Type");
+    nfInputContainer.classList.add("hidden");
+    clearGeoJsonLayer();
+};
+
+stateSelect.onchange = () => {
+    if (!stateSelect.value) return;
+    const districts = Object.keys(hierarchyData[ngoSelect.value][stateSelect.value]).sort();
+    populateSelect(districtSelect, districts, "District");
+    
+    resetOptions(blockSelect, "Block");
+    resetOptions(gpSelect, "GP");
+    resetOptions(villageSelect, "Village");
+    resetOptions(activitySelect, "Activity");
+    resetOptions(cropTypeSelect, "Crop Type");
+    nfInputContainer.classList.add("hidden");
+    clearGeoJsonLayer();
+};
+
+districtSelect.onchange = () => {
+    if (!districtSelect.value) return;
+    const blocks = Object.keys(hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value]).sort();
+    populateSelect(blockSelect, blocks, "Block");
+    
+    resetOptions(gpSelect, "GP");
+    resetOptions(villageSelect, "Village");
+    resetOptions(activitySelect, "Activity");
+    resetOptions(cropTypeSelect, "Crop Type");
+    nfInputContainer.classList.add("hidden");
+    clearGeoJsonLayer();
+};
+
+blockSelect.onchange = () => {
+    if (!blockSelect.value) return;
+    const gps = Object.keys(hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value][blockSelect.value]).sort();
+    populateSelect(gpSelect, gps, "GP");
+    
+    resetOptions(villageSelect, "Village");
+    resetOptions(activitySelect, "Activity");
+    resetOptions(cropTypeSelect, "Crop Type");
+    nfInputContainer.classList.add("hidden");
+    clearGeoJsonLayer();
+};
+
+gpSelect.onchange = () => {
+    if (!gpSelect.value) {
+        clearGeoJsonLayer();
+        return;
+    }
+    const gpData = hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value][blockSelect.value][gpSelect.value];
+    
+    // Load GeoJSON Layer
+    loadGPGeoJson(gpData.geojson);
+    
+    // Initial populate of Village dropdown
+    const villages = Object.keys(gpData.villages).sort();
+    populateSelect(villageSelect, villages, "Village");
+    
+    // Populate standard Crop Type options
+    populateCropTypes();
+    
+    // Reset child selections and trigger dynamic update
+    villageSelect.value = "";
+    activitySelect.value = "";
+    cropTypeSelect.value = "";
+    nfInputSelect.value = "";
+    
+    updateFilterDropdowns();
+};
+
+// Village filter trigger
+villageSelect.onchange = () => {
+    updateFilterDropdowns();
+};
+
+// Activity filter trigger
+activitySelect.onchange = () => {
+    cropTypeSelect.value = "";
+    nfInputSelect.value = "";
+    updateFilterDropdowns();
+};
+
+cropTypeSelect.onchange = () => {
+    nfInputSelect.value = "";
+    updateFilterDropdowns();
+};
+
+nfInputSelect.onchange = () => {
+    filterAndStyleMap();
+};
+
+// Dynamic Cascading Dropdown Populators
+function getAvailableActivities() {
+    const ngo = ngoSelect.value;
+    const state = stateSelect.value;
+    const dist = districtSelect.value;
+    const blk = blockSelect.value;
+    const gp = gpSelect.value;
+    if (!ngo || !state || !dist || !blk || !gp) return [];
+    
+    const gpNode = hierarchyData[ngo][state][dist][blk][gp];
+    const vil = villageSelect.value;
+    const vils = vil ? [vil] : Object.keys(gpNode.villages);
+    
+    const activities = new Set();
+    vils.forEach(v => {
+        const vilNode = gpNode.villages[v];
+        if (vilNode) {
+            Object.keys(vilNode).forEach(act => activities.add(act));
+        }
+    });
+    return Array.from(activities).sort();
+}
+
+function populateCropTypes() {
+    populateSelect(cropTypeSelect, ["Mono", "Poly", "PMDS"], "Crop Type");
+}
+
+function getAvailableNFInputs() {
+    const ngo = ngoSelect.value;
+    const state = stateSelect.value;
+    const dist = districtSelect.value;
+    const blk = blockSelect.value;
+    const gp = gpSelect.value;
+    if (!ngo || !state || !dist || !blk || !gp) return [];
+    
+    const gpNode = hierarchyData[ngo][state][dist][blk][gp];
+    const vil = villageSelect.value;
+    const act = activitySelect.value;
+    const ct = cropTypeSelect.value;
+    
+    if (act && act !== 'NF') return [];
+    
+    const vils = vil ? [vil] : Object.keys(gpNode.villages);
+    const inputsSet = new Set();
+    vils.forEach(v => {
+        const vilNode = gpNode.villages[v];
+        if (vilNode && vilNode.NF) {
+            const cts = ct ? [ct] : Object.keys(vilNode.NF);
+            cts.forEach(c => {
+                if (vilNode.NF[c] && vilNode.NF[c].crop_activities) {
+                    const cas = Object.keys(vilNode.NF[c].crop_activities);
+                    cas.forEach(c_act => {
+                        if (c_act === 'NF Operations' && vilNode.NF[c].crop_activities[c_act]) {
+                            const inps = vilNode.NF[c].crop_activities[c_act].inputs || [];
+                            inps.forEach(i => inputsSet.add(i));
+                        }
+                    });
+                }
+            });
+        }
+    });
+    return Array.from(inputsSet).sort();
+}
+
+function updateFilterDropdowns() {
+    // Cache current values
+    const selectedVil = villageSelect.value;
+    const selectedAct = activitySelect.value;
+    const selectedCt = cropTypeSelect.value;
+    const selectedInp = nfInputSelect.value;
+    
+    // 1. Update Activity
+    const acts = getAvailableActivities();
+    if (acts.length > 0) {
+        populateSelect(activitySelect, acts, "Activity");
+        if (acts.includes(selectedAct)) {
+            activitySelect.value = selectedAct;
+        }
+    } else {
+        resetOptions(activitySelect, "Activity");
+    }
+    
+    // 2. Update NF Inputs (only for NF activity)
+    const actVal = activitySelect.value;
+    if (actVal === 'NF') {
+        const inps = getAvailableNFInputs();
+        if (inps.length > 0) {
+            nfInputContainer.classList.remove("hidden");
+            populateSelect(nfInputSelect, inps, "Input");
+            if (inps.includes(selectedInp)) {
+                nfInputSelect.value = selectedInp;
+            }
+        } else {
+            nfInputContainer.classList.add("hidden");
+            nfInputSelect.value = "";
+        }
+    } else {
+        nfInputContainer.classList.add("hidden");
+        nfInputSelect.value = "";
+    }
+    
+    // Render styles based on new filter combination
+    filterAndStyleMap();
+}
+
+// Reset trigger
+resetBtn.onclick = () => {
+    ngoSelect.value = "";
+    populateNGOs();
+    clearGeoJsonLayer();
+    resetAttributePanel();
+};
+
+// =============================
+// GEOJSON LAYER LOAD & RENDER
+// =============================
+function loadGPGeoJson(filename) {
+    if (!filename) return;
+    
+    // Add loading text to attributes
+    attributePanel.innerHTML = `
+        <div class="flex flex-col items-center justify-center space-y-2">
+            <div class="w-8 h-8 border-2 border-green-500/20 border-t-green-500 rounded-full animate-spin"></div>
+            <p class="text-xs text-gray-400">Loading spatial plots...</p>
+        </div>
+    `;
+    
+    fetch('data/geojson/' + filename)
+        .then(res => res.json())
+        .then(data => {
+            clearGeoJsonLayer();
+            gpFeatures = data.features || [];
+            
+            currentGeoJsonLayer = L.geoJSON(data, {
+                style: styleFeature,
+                onEachFeature: onEachFeature
+            }).addTo(map);
+            
+            // Bring matching highlighted features to the front on load
+            currentGeoJsonLayer.eachLayer(layer => {
+                if (matchFilters(layer.feature)) {
+                    layer.bringToFront();
+                }
+            });
+            
+            // Fit bounds
+            if (gpFeatures.length > 0) {
+                map.fitBounds(currentGeoJsonLayer.getBounds());
+            }
+            
+            resetAttributePanel();
+        })
+        .catch(err => {
+            console.error("Failed to load geojson:", err);
+            attributePanel.innerHTML = `<div class="text-red-400 text-xs font-semibold">Error: Failed to load geojson layer.</div>`;
+        });
+}
+
+function clearGeoJsonLayer() {
+    if (currentGeoJsonLayer) {
+        map.removeLayer(currentGeoJsonLayer);
+        currentGeoJsonLayer = null;
+    }
+    if (selectedFeatureLayer) {
+        map.removeLayer(selectedFeatureLayer);
+        selectedFeatureLayer = null;
+    }
+    gpFeatures = [];
+}
+
+// Style rule
+function styleFeature(feature) {
+    const props = feature.properties;
+    
+    // Check if any activity/crop/inputs filters are active
+    const hasActivityFilter = activitySelect.value || 
+                              cropTypeSelect.value || 
+                              nfInputSelect.value;
+                              
+    if (hasActivityFilter) {
+        const isMatched = matchFilters(feature);
+        if (isMatched && props.has_excel) {
+            // Highlight active matched plots
+            if (props.Activity === 'NF') {
+                return {
+                    color: '#10b981',      // Emerald Green border
+                    fillColor: '#10b981',  // Emerald Green fill
+                    fill: true,            // Explicitly enable fill override
+                    weight: 2,
+                    opacity: 0.9,
+                    fillOpacity: 0.65
+                };
+            } else if (props.Activity === 'Fallow') {
+                return {
+                    color: '#d97706',      // Darker gold border
+                    fillColor: '#f59e0b',  // Gold/Amber fill
+                    fill: true,            // Explicitly enable fill override
+                    weight: 2,
+                    opacity: 0.9,
+                    fillOpacity: 0.65
+                };
+            }
+        }
+    }
+    
+    // Default style: visible in white outline while selecting the GP/Village without fill
+    // If a village is selected, show other villages as faint gray outlines,
+    // and highlight the selected village's plots in red color fill!
+    if (villageSelect.value && props.Village) {
+        if (props.Village.toLowerCase() === villageSelect.value.toLowerCase()) {
+            return {
+                color: '#ef4444',      // Soft red border
+                fillColor: '#ef4444',  // Soft red fill
+                fill: true,            // Enable fill
+                weight: 2,
+                opacity: 0.9,
+                fillOpacity: 0.45
+            };
+        } else {
+            return {
+                color: '#4b5563',      // Faint gray border
+                fillColor: 'transparent',
+                fill: false,
+                fillOpacity: 0,
+                weight: 0.5,
+                opacity: 0.15
+            };
+        }
+    }
+    
+    return {
+        color: '#ffffff',      // Crisp white border
+        fillColor: 'transparent',
+        fill: false,           // Disable fill
+        fillOpacity: 0,        // Explicitly set fill opacity to 0
+        weight: 1.2,
+        opacity: 0.65
+    };
+}
+
+// Check feature matching active filters
+function matchFilters(feature) {
+    const props = feature.properties;
+    
+    // Check if plot belongs to Excel records (must have excel metadata to match detailed criteria)
+    if (!props.has_excel) return false;
+    
+    // 1. Village filter
+    if (villageSelect.value && props.Village.toLowerCase() !== villageSelect.value.toLowerCase()) {
+        return false;
+    }
+    // 2. Activity filter (NF, Fallow)
+    if (activitySelect.value && props.Activity.toLowerCase() !== activitySelect.value.toLowerCase()) {
+        return false;
+    }
+    // 3. Crop Type filter
+    if (cropTypeSelect.value && props['Crop Type'].toLowerCase() !== cropTypeSelect.value.toLowerCase()) {
+        return false;
+    }
+    // 5. NF Inputs applied filter (subset matching)
+    if (nfInputSelect.value) {
+        const inp_selected = nfInputSelect.value.toLowerCase();
+        const inp_applied = props['NF Inputs'].toLowerCase();
+        if (!inp_applied.includes(inp_selected)) {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+// Redraw layer style when filters change
+function filterAndStyleMap() {
+    if (currentGeoJsonLayer) {
+        currentGeoJsonLayer.setStyle(styleFeature);
+        
+        // Bring matched highlighted features to the front so they show above the default white boundaries
+        currentGeoJsonLayer.eachLayer(layer => {
+            if (matchFilters(layer.feature)) {
+                layer.bringToFront();
+            }
+        });
+    }
+}
+
+// =============================
+// EVENT BINDINGS FOR POLYGONS
+// =============================
+function createPopupContent(props) {
+    if (!props.has_excel) {
+        return `
+            <div class="font-sans min-w-[200px] text-white text-xs space-y-2">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b border-white/10 pb-1.5 mb-1.5">
+                    <span class="font-bold text-[10px] text-gray-400 uppercase tracking-wider">Plot ID</span>
+                    <span class="font-bold text-white break-all max-w-[70%] text-right">${props['Plot ID'] || 'N/A'}</span>
+                </div>
+                <div>
+                    <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider block">Area:</span>
+                    <span class="font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
+                </div>
+                <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-2 text-center mt-2">
+                    <span class="color-red-400 font-bold text-[10px] block">No Survey Data</span>
+                </div>
+            </div>
+        `;
+    }
+
+    const badgeColorClass = props.Activity === 'NF' ? 'text-green-400 bg-green-500/10 border-green-500/20' : 'text-amber-400 bg-amber-500/10 border-amber-500/20';
+    const badgeText = props.Activity === 'NF' ? 'Natural Farming (NF)' : 'Fallow Land';
+
+    return `
+        <div class="font-sans min-w-[240px] text-white text-xs space-y-2">
+            <!-- Header -->
+            <div class="flex flex-wrap justify-between items-center gap-2 border-b border-white/10 pb-1.5 mb-1.5">
+                <span class="font-bold text-[9px] text-gray-400 uppercase tracking-wider">Plot ID</span>
+                <span class="font-extrabold text-white bg-white/5 px-2 py-0.5 rounded border border-white/10 shadow-sm break-all max-w-[70%] text-right">${props['Plot ID']}</span>
+            </div>
+            
+            <!-- Grid 1 -->
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Area</span>
+                    <span class="font-semibold text-gray-200">${props['Area']} Acres</span>
+                </div>
+                <div>
+                    <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Season</span>
+                    <span class="font-semibold text-gray-200">${props['Season']}</span>
+                </div>
+            </div>
+            
+            <!-- Grid 2 -->
+            <div class="grid grid-cols-2 gap-2">
+                <div>
+                    <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Year</span>
+                    <span class="font-semibold text-gray-200">${props['Year']}</span>
+                </div>
+                <div>
+                    <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Crop Type</span>
+                    <span class="font-semibold text-gray-200">${props['Crop Type']}</span>
+                </div>
+            </div>
+            
+            <!-- Crop Name -->
+            <div>
+                <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Main Crop</span>
+                <span class="font-bold text-white bg-white/5 border border-white/5 px-2 py-0.5 rounded inline-block mt-0.5">${props['Main Crop']}</span>
+            </div>
+            
+            <!-- Inputs -->
+            <div class="border-t border-white/10 pt-1.5 mt-1.5">
+                <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block mb-0.5">NF Inputs Applied</span>
+                <p class="text-[11px] text-gray-200 leading-relaxed font-medium">${props['NF Inputs']}</p>
+            </div>
+            
+            <!-- Badge -->
+            <div class="text-center p-1 rounded border ${badgeColorClass} text-[9px] font-bold tracking-wider uppercase mt-1">
+                ${badgeText}
+            </div>
+        </div>
+    `;
+}
+
+function onEachFeature(feature, layer) {
+    const props = feature.properties;
+    
+    // Bind Tooltip showing Plot ID
+    const label = `Plot ID: ${props['Plot ID'] || 'N/A'}`;
+    layer.bindTooltip(label, { sticky: true, className: 'bg-dark-900 border border-white/10 rounded px-2 py-1 text-white text-[10px] font-bold shadow-lg' });
+
+    // Only allow tooltips to show when zoomed in close (zoom >= 14)
+    layer.on('tooltipopen', function(e) {
+        if (map.getZoom() < 14) {
+            layer.closeTooltip();
+        }
+    });
+
+    // Bind popup box appearing on click
+    layer.bindPopup(createPopupContent(props), {
+        className: 'custom-leaflet-popup',
+        maxWidth: 320
+    });
+
+    layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: selectFeature
+    });
+}
+
+function highlightFeature(e) {
+    const layer = e.target;
+    const isMatched = matchFilters(layer.feature);
+    
+    layer.setStyle({
+        weight: 3.5,
+        color: '#fff',
+        opacity: 0.95
+    });
+
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+    }
+}
+
+function resetHighlight(e) {
+    const layer = e.target;
+    currentGeoJsonLayer.resetStyle(layer);
+}
+
+function selectFeature(e) {
+    const layer = e.target;
+    const props = layer.feature.properties;
+    
+    // Zoom to click
+    map.fitBounds(layer.getBounds(), { maxZoom: 16 });
+    
+    // Visual click indicator
+    if (selectedFeatureLayer) {
+        map.removeLayer(selectedFeatureLayer);
+    }
+    selectedFeatureLayer = L.geoJSON(layer.feature, {
+        style: {
+            color: '#3b82f6', // Bright Blue highlight
+            fillColor: 'transparent',
+            fill: false,
+            fillOpacity: 0,
+            weight: 4,
+            opacity: 1
+        }
+    }).addTo(map);
+
+    // Update Attribute Display Card in left sidebar
+    displayAttributes(props);
+}
+
+// =============================
+// UI ATTRIBUTE CARD UPDATES
+// =============================
+function resetAttributePanel() {
+    attributePanel.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-gray-500 mb-2 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+        </svg>
+        <p class="text-xs text-gray-400 font-medium">Select a GP/Village filter and click a plot on the map to display attributes.</p>
+    `;
+}
+
+function displayAttributes(props) {
+    if (!props.has_excel) {
+        attributePanel.innerHTML = `
+            <div class="w-full text-left space-y-3">
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b border-white/5 pb-2">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase">Plot ID</span>
+                    <span class="text-sm font-bold text-white bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20 break-all max-w-[70%] text-right">${props['Plot ID'] || 'N/A'}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase">Area</span>
+                    <span class="text-xs font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
+                </div>
+                <div class="p-3 bg-red-900/10 border border-red-500/20 rounded-xl mt-2 text-center">
+                    <span class="text-red-400 font-bold text-xs block mb-0.5">No Survey Data</span>
+                    <p class="text-[10px] text-gray-400">This plot exists in the spatial shapefile but has no matching record in the natural farming or fallow Excel spreadsheets.</p>
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    // Standard matching attributes display card
+    const badgeColor = props.Activity === 'NF' 
+        ? 'text-green-400 bg-green-500/10 border-green-500/20' 
+        : 'text-amber-400 bg-amber-500/10 border-amber-500/20';
+
+    attributePanel.innerHTML = `
+        <div class="w-full text-left space-y-2.5 animate-fadeIn">
+            <div class="flex flex-wrap justify-between items-center gap-2 border-b border-white/5 pb-2">
+                <span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Plot ID</span>
+                <span class="text-sm font-extrabold text-white bg-white/5 px-2.5 py-0.5 rounded-full border border-white/10 shadow-sm break-all max-w-[70%] text-right">${props['Plot ID']}</span>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-3 pt-1">
+                <div>
+                    <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Area</span>
+                    <span class="text-xs font-semibold text-gray-200">${props['Area']} Acres</span>
+                </div>
+                <div>
+                    <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Season</span>
+                    <span class="text-xs font-semibold text-gray-200">${props['Season']}</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-3">
+                <div>
+                    <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Year</span>
+                    <span class="text-xs font-semibold text-gray-200">${props['Year']}</span>
+                </div>
+                <div>
+                    <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Crop Type</span>
+                    <span class="text-xs font-semibold text-gray-200">${props['Crop Type']}</span>
+                </div>
+            </div>
+
+            <div class="pt-1">
+                <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Main Crop</span>
+                <span class="text-xs font-bold text-white px-2 py-1 rounded bg-white/5 border border-white/5 inline-block">${props['Main Crop']}</span>
+            </div>
+
+            <div class="pt-1 border-t border-white/5">
+                <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">NF Inputs Applied</span>
+                <p class="text-xs font-semibold text-gray-200 leading-relaxed">${props['NF Inputs']}</p>
+            </div>
+            
+            <div class="mt-2 text-center p-2 rounded-xl border ${badgeColor} flex items-center justify-center space-x-1.5">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${props.Activity === 'NF' ? 'bg-green-400' : 'bg-amber-400'}"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 ${props.Activity === 'NF' ? 'bg-green-500' : 'bg-amber-500'}"></span>
+                </span>
+                <span class="text-[10px] font-extrabold uppercase tracking-widest">${props.Activity === 'NF' ? 'Natural Farming (NF)' : 'Fallow Land'}</span>
+            </div>
+        </div>
+    `;
+}
+</script>
+</body>
+</html>
