@@ -165,12 +165,12 @@
                 </select>
             </div>
 
-            <!-- GP Checkboxes -->
+            <!-- GP Dropdown -->
             <div>
                 <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Gram Panchayat (GP)</label>
-                <div id="gpCheckboxContainer" class="w-full max-h-40 overflow-y-auto bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white space-y-1.5 focus-within:border-green-500/50 transition-colors duration-200">
-                    <p class="text-gray-500 italic text-[11px]">Select Block first...</p>
-                </div>
+                <select id="gpSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer" disabled>
+                    <option value="" class="bg-dark-900">Select GP</option>
+                </select>
             </div>
 
             <!-- Village Dropdown -->
@@ -189,11 +189,12 @@
                 </select>
             </div>
 
-            <!-- NF Inputs (Dynamic Checkboxes) -->
+            <!-- NF Inputs (Dynamic) -->
             <div id="nfInputContainer" class="hidden">
                 <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Natural Farming Inputs</label>
-                <div id="nfInputCheckboxContainer" class="w-full max-h-40 overflow-y-auto bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white space-y-1.5 focus-within:border-green-500/50 transition-colors duration-200">
-                </div>
+                <select id="nfInputSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer">
+                    <option value="" class="bg-dark-900">Select Input</option>
+                </select>
             </div>
 
             <!-- Crop Type Dropdown -->
@@ -307,11 +308,11 @@ const ngoSelect = document.getElementById("ngoSelect");
 const stateSelect = document.getElementById("stateSelect");
 const districtSelect = document.getElementById("districtSelect");
 const blockSelect = document.getElementById("blockSelect");
-const gpCheckboxContainer = document.getElementById("gpCheckboxContainer");
+const gpSelect = document.getElementById("gpSelect");
 const villageSelect = document.getElementById("villageSelect");
 const activitySelect = document.getElementById("activitySelect");
 const cropTypeSelect = document.getElementById("cropTypeSelect");
-const nfInputCheckboxContainer = document.getElementById("nfInputCheckboxContainer");
+const nfInputSelect = document.getElementById("nfInputSelect");
 
 const nfInputContainer = document.getElementById("nfInputContainer");
 const attributePanel = document.getElementById("attributePanel");
@@ -367,14 +368,11 @@ function populateNGOs() {
     resetOptions(stateSelect, "State");
     resetOptions(districtSelect, "District");
     resetOptions(blockSelect, "Block");
-    
-    gpCheckboxContainer.innerHTML = `<p class="text-gray-500 italic text-[11px]">Select Block first...</p>`;
-    
+    resetOptions(gpSelect, "GP");
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
-    nfInputCheckboxContainer.innerHTML = "";
 }
 
 // Event handlers
@@ -389,12 +387,11 @@ ngoSelect.onchange = () => {
     
     resetOptions(districtSelect, "District");
     resetOptions(blockSelect, "Block");
-    gpCheckboxContainer.innerHTML = `<p class="text-gray-500 italic text-[11px]">Select Block first...</p>`;
+    resetOptions(gpSelect, "GP");
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
-    nfInputCheckboxContainer.innerHTML = "";
     clearGeoJsonLayer();
 };
 
@@ -404,12 +401,11 @@ stateSelect.onchange = () => {
     populateSelect(districtSelect, districts, "District");
     
     resetOptions(blockSelect, "Block");
-    gpCheckboxContainer.innerHTML = `<p class="text-gray-500 italic text-[11px]">Select Block first...</p>`;
+    resetOptions(gpSelect, "GP");
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
-    nfInputCheckboxContainer.innerHTML = "";
     clearGeoJsonLayer();
 };
 
@@ -418,188 +414,51 @@ districtSelect.onchange = () => {
     const blocks = Object.keys(hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value]).sort();
     populateSelect(blockSelect, blocks, "Block");
     
-    gpCheckboxContainer.innerHTML = `<p class="text-gray-500 italic text-[11px]">Select Block first...</p>`;
+    resetOptions(gpSelect, "GP");
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
-    nfInputCheckboxContainer.innerHTML = "";
     clearGeoJsonLayer();
 };
 
 blockSelect.onchange = () => {
     if (!blockSelect.value) return;
     const gps = Object.keys(hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value][blockSelect.value]).sort();
-    populateGPCheckboxes(gps);
+    populateSelect(gpSelect, gps, "GP");
     
     resetOptions(villageSelect, "Village");
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
-    nfInputCheckboxContainer.innerHTML = "";
     clearGeoJsonLayer();
 };
 
-function getSelectedGPs() {
-    const checkboxes = document.querySelectorAll(".gp-checkbox:checked");
-    return Array.from(checkboxes).map(cb => cb.value);
-}
-
-function getSelectedNFInputs() {
-    const checkboxes = document.querySelectorAll(".nf-input-checkbox:checked");
-    return Array.from(checkboxes).map(cb => cb.value);
-}
-
-function populateGPCheckboxes(gps) {
-    gpCheckboxContainer.innerHTML = "";
-    if (gps.length === 0) {
-        gpCheckboxContainer.innerHTML = `<p class="text-gray-500 italic text-[11px]">No GPs available</p>`;
-        return;
-    }
-    
-    // Select All
-    const selectAllWrapper = document.createElement("label");
-    selectAllWrapper.className = "flex items-start space-x-2.5 py-1 px-1.5 rounded hover:bg-white/5 cursor-pointer transition-colors duration-150 border-b border-white/10 pb-1.5 mb-1.5";
-    
-    const selectAllCheckbox = document.createElement("input");
-    selectAllCheckbox.type = "checkbox";
-    selectAllCheckbox.id = "gpSelectAll";
-    selectAllCheckbox.className = "mt-0.5 rounded border-white/20 text-emerald-500 focus:ring-0 focus:ring-offset-0 bg-white/5 cursor-pointer";
-    
-    const selectAllLabel = document.createElement("span");
-    selectAllLabel.className = "text-xs font-bold text-gray-300 select-none leading-tight";
-    selectAllLabel.innerText = "Select All GPs";
-    
-    selectAllWrapper.appendChild(selectAllCheckbox);
-    selectAllWrapper.appendChild(selectAllLabel);
-    gpCheckboxContainer.appendChild(selectAllWrapper);
-    
-    gps.forEach(gp => {
-        const wrapper = document.createElement("label");
-        wrapper.className = "flex items-start space-x-2.5 py-1 px-1.5 rounded hover:bg-white/5 cursor-pointer transition-colors duration-150 gp-checkbox-item";
-        
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.value = gp;
-        checkbox.className = "mt-0.5 rounded border-white/20 text-emerald-500 focus:ring-0 focus:ring-offset-0 bg-white/5 cursor-pointer gp-checkbox";
-        
-        checkbox.onchange = () => {
-            const allCheckboxes = gpCheckboxContainer.querySelectorAll(".gp-checkbox");
-            const checkedCheckboxes = gpCheckboxContainer.querySelectorAll(".gp-checkbox:checked");
-            selectAllCheckbox.checked = (allCheckboxes.length === checkedCheckboxes.length);
-            
-            handleGPSelectionChange();
-        };
-        
-        const label = document.createElement("span");
-        label.className = "text-xs text-gray-200 select-none leading-tight";
-        label.innerText = gp;
-        
-        wrapper.appendChild(checkbox);
-        wrapper.appendChild(label);
-        gpCheckboxContainer.appendChild(wrapper);
-    });
-    
-    selectAllCheckbox.onchange = () => {
-        const allCheckboxes = gpCheckboxContainer.querySelectorAll(".gp-checkbox");
-        allCheckboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
-        handleGPSelectionChange();
-    };
-}
-
-function handleGPSelectionChange() {
-    const selectedGps = getSelectedGPs();
-    if (selectedGps.length === 0) {
+gpSelect.onchange = () => {
+    if (!gpSelect.value) {
         clearGeoJsonLayer();
-        resetOptions(villageSelect, "Village");
-        resetOptions(activitySelect, "Activity");
-        resetOptions(cropTypeSelect, "Crop Type");
-        nfInputContainer.classList.add("hidden");
-        nfInputCheckboxContainer.innerHTML = "";
-        resetAttributePanel();
         return;
     }
+    const gpData = hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value][blockSelect.value][gpSelect.value];
     
-    const gpDataList = selectedGps.map(gp => {
-        return hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value][blockSelect.value][gp];
-    });
+    // Load GeoJSON Layer
+    loadGPGeoJson(gpData.geojson);
     
-    loadMultipleGPsGeoJson(gpDataList);
+    // Initial populate of Village dropdown
+    const villages = Object.keys(gpData.villages).sort();
+    populateSelect(villageSelect, villages, "Village");
     
-    const allVillages = new Set();
-    gpDataList.forEach(gpData => {
-        if (gpData && gpData.villages) {
-            Object.keys(gpData.villages).forEach(v => allVillages.add(v));
-        }
-    });
-    populateSelect(villageSelect, Array.from(allVillages).sort(), "Village");
-    
+    // Populate standard Crop Type options
     populateCropTypes();
     
+    // Reset child selections and trigger dynamic update
     villageSelect.value = "";
     activitySelect.value = "";
     cropTypeSelect.value = "";
-    nfInputCheckboxContainer.innerHTML = "";
+    nfInputSelect.value = "";
     
     updateFilterDropdowns();
-}
-
-function populateNFInputCheckboxes(inps) {
-    nfInputCheckboxContainer.innerHTML = "";
-    if (inps.length === 0) {
-        nfInputCheckboxContainer.innerHTML = `<p class="text-gray-500 italic text-[11px]">No inputs available</p>`;
-        return;
-    }
-    
-    // Select All
-    const selectAllWrapper = document.createElement("label");
-    selectAllWrapper.className = "flex items-start space-x-2.5 py-1 px-1.5 rounded hover:bg-white/5 cursor-pointer transition-colors duration-150 border-b border-white/10 pb-1.5 mb-1.5";
-    
-    const selectAllCheckbox = document.createElement("input");
-    selectAllCheckbox.type = "checkbox";
-    selectAllCheckbox.id = "nfInputSelectAll";
-    selectAllCheckbox.className = "mt-0.5 rounded border-white/20 text-emerald-500 focus:ring-0 focus:ring-offset-0 bg-white/5 cursor-pointer";
-    
-    const selectAllLabel = document.createElement("span");
-    selectAllLabel.className = "text-xs font-bold text-gray-300 select-none leading-tight";
-    selectAllLabel.innerText = "Select All Inputs";
-    
-    selectAllWrapper.appendChild(selectAllCheckbox);
-    selectAllWrapper.appendChild(selectAllLabel);
-    nfInputCheckboxContainer.appendChild(selectAllWrapper);
-    
-    inps.forEach(inp => {
-        const wrapper = document.createElement("label");
-        wrapper.className = "flex items-start space-x-2.5 py-1 px-1.5 rounded hover:bg-white/5 cursor-pointer transition-colors duration-150 nf-input-checkbox-item";
-        
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.value = inp;
-        checkbox.className = "mt-0.5 rounded border-white/20 text-emerald-500 focus:ring-0 focus:ring-offset-0 bg-white/5 cursor-pointer nf-input-checkbox";
-        
-        checkbox.onchange = () => {
-            const allCheckboxes = nfInputCheckboxContainer.querySelectorAll(".nf-input-checkbox");
-            const checkedCheckboxes = nfInputCheckboxContainer.querySelectorAll(".nf-input-checkbox:checked");
-            selectAllCheckbox.checked = (allCheckboxes.length === checkedCheckboxes.length);
-            
-            filterAndStyleMap();
-        };
-        
-        const label = document.createElement("span");
-        label.className = "text-xs text-gray-200 select-none leading-tight";
-        label.innerText = "✓ " + inp;
-        
-        wrapper.appendChild(checkbox);
-        wrapper.appendChild(label);
-        nfInputCheckboxContainer.appendChild(wrapper);
-    });
-    
-    selectAllCheckbox.onchange = () => {
-        const allCheckboxes = nfInputCheckboxContainer.querySelectorAll(".nf-input-checkbox");
-        allCheckboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
-        filterAndStyleMap();
-    };
-}
+};
 
 // Village filter trigger
 villageSelect.onchange = () => {
@@ -609,13 +468,17 @@ villageSelect.onchange = () => {
 // Activity filter trigger
 activitySelect.onchange = () => {
     cropTypeSelect.value = "";
-    nfInputCheckboxContainer.innerHTML = "";
+    nfInputSelect.value = "";
     updateFilterDropdowns();
 };
 
 cropTypeSelect.onchange = () => {
-    nfInputCheckboxContainer.innerHTML = "";
+    nfInputSelect.value = "";
     updateFilterDropdowns();
+};
+
+nfInputSelect.onchange = () => {
+    filterAndStyleMap();
 };
 
 // Dynamic Cascading Dropdown Populators
@@ -624,23 +487,19 @@ function getAvailableActivities() {
     const state = stateSelect.value;
     const dist = districtSelect.value;
     const blk = blockSelect.value;
-    const selectedGps = getSelectedGPs();
-    if (!ngo || !state || !dist || !blk || selectedGps.length === 0) return [];
+    const gp = gpSelect.value;
+    if (!ngo || !state || !dist || !blk || !gp) return [];
+    
+    const gpNode = hierarchyData[ngo][state][dist][blk][gp];
+    const vil = villageSelect.value;
+    const vils = vil ? [vil] : Object.keys(gpNode.villages);
     
     const activities = new Set();
-    selectedGps.forEach(gp => {
-        const gpNode = hierarchyData[ngo][state][dist][blk][gp];
-        if (!gpNode) return;
-        
-        const vil = villageSelect.value;
-        const vils = vil ? [vil] : Object.keys(gpNode.villages);
-        
-        vils.forEach(v => {
-            const vilNode = gpNode.villages[v];
-            if (vilNode) {
-                Object.keys(vilNode).forEach(act => activities.add(act));
-            }
-        });
+    vils.forEach(v => {
+        const vilNode = gpNode.villages[v];
+        if (vilNode) {
+            Object.keys(vilNode).forEach(act => activities.add(act));
+        }
     });
     return Array.from(activities).sort();
 }
@@ -654,38 +513,34 @@ function getAvailableNFInputs() {
     const state = stateSelect.value;
     const dist = districtSelect.value;
     const blk = blockSelect.value;
-    const selectedGps = getSelectedGPs();
-    if (!ngo || !state || !dist || !blk || selectedGps.length === 0) return [];
+    const gp = gpSelect.value;
+    if (!ngo || !state || !dist || !blk || !gp) return [];
     
+    const gpNode = hierarchyData[ngo][state][dist][blk][gp];
     const vil = villageSelect.value;
     const act = activitySelect.value;
     const ct = cropTypeSelect.value;
     
     if (act && act !== 'NF') return [];
     
+    const vils = vil ? [vil] : Object.keys(gpNode.villages);
     const inputsSet = new Set();
-    selectedGps.forEach(gp => {
-        const gpNode = hierarchyData[ngo][state][dist][blk][gp];
-        if (!gpNode) return;
-        
-        const vils = vil ? [vil] : Object.keys(gpNode.villages);
-        vils.forEach(v => {
-            const vilNode = gpNode.villages[v];
-            if (vilNode && vilNode.NF) {
-                const cts = ct ? [ct] : Object.keys(vilNode.NF);
-                cts.forEach(c => {
-                    if (vilNode.NF[c] && vilNode.NF[c].crop_activities) {
-                        const cas = Object.keys(vilNode.NF[c].crop_activities);
-                        cas.forEach(c_act => {
-                            if (c_act === 'NF Operations' && vilNode.NF[c].crop_activities[c_act]) {
-                                const inps = vilNode.NF[c].crop_activities[c_act].inputs || [];
-                                inps.forEach(i => inputsSet.add(i));
-                            }
-                        });
-                    }
-                });
-            }
-        });
+    vils.forEach(v => {
+        const vilNode = gpNode.villages[v];
+        if (vilNode && vilNode.NF) {
+            const cts = ct ? [ct] : Object.keys(vilNode.NF);
+            cts.forEach(c => {
+                if (vilNode.NF[c] && vilNode.NF[c].crop_activities) {
+                    const cas = Object.keys(vilNode.NF[c].crop_activities);
+                    cas.forEach(c_act => {
+                        if (c_act === 'NF Operations' && vilNode.NF[c].crop_activities[c_act]) {
+                            const inps = vilNode.NF[c].crop_activities[c_act].inputs || [];
+                            inps.forEach(i => inputsSet.add(i));
+                        }
+                    });
+                }
+            });
+        }
     });
     return Array.from(inputsSet).sort();
 }
@@ -695,7 +550,7 @@ function updateFilterDropdowns() {
     const selectedVil = villageSelect.value;
     const selectedAct = activitySelect.value;
     const selectedCt = cropTypeSelect.value;
-    const selectedInps = getSelectedNFInputs();
+    const selectedInp = nfInputSelect.value;
     
     // 1. Update Activity
     const acts = getAvailableActivities();
@@ -714,28 +569,17 @@ function updateFilterDropdowns() {
         const inps = getAvailableNFInputs();
         if (inps.length > 0) {
             nfInputContainer.classList.remove("hidden");
-            populateNFInputCheckboxes(inps);
-            
-            // Restore selections if possible
-            const checkboxes = nfInputCheckboxContainer.querySelectorAll(".nf-input-checkbox");
-            let checkedCount = 0;
-            checkboxes.forEach(cb => {
-                if (selectedInps.includes(cb.value)) {
-                    cb.checked = true;
-                    checkedCount++;
-                }
-            });
-            const selectAllCheckbox = document.getElementById("nfInputSelectAll");
-            if (selectAllCheckbox) {
-                selectAllCheckbox.checked = (checkboxes.length === checkedCount && checkboxes.length > 0);
+            populateSelect(nfInputSelect, inps, "Input");
+            if (inps.includes(selectedInp)) {
+                nfInputSelect.value = selectedInp;
             }
         } else {
             nfInputContainer.classList.add("hidden");
-            nfInputCheckboxContainer.innerHTML = "";
+            nfInputSelect.value = "";
         }
     } else {
         nfInputContainer.classList.add("hidden");
-        nfInputCheckboxContainer.innerHTML = "";
+        nfInputSelect.value = "";
     }
     
     // Render styles based on new filter combination
@@ -753,7 +597,9 @@ resetBtn.onclick = () => {
 // =============================
 // GEOJSON LAYER LOAD & RENDER
 // =============================
-function loadMultipleGPsGeoJson(gpDataList) {
+function loadGPGeoJson(filename) {
+    if (!filename) return;
+    
     // Add loading text to attributes
     attributePanel.innerHTML = `
         <div class="flex flex-col items-center justify-center space-y-2">
@@ -762,35 +608,13 @@ function loadMultipleGPsGeoJson(gpDataList) {
         </div>
     `;
     
-    const fetchPromises = gpDataList
-        .filter(gpData => gpData && gpData.geojson)
-        .map(gpData => fetch('data/geojson/' + gpData.geojson).then(res => res.json()));
-        
-    if (fetchPromises.length === 0) {
-        clearGeoJsonLayer();
-        resetAttributePanel();
-        return;
-    }
-    
-    Promise.all(fetchPromises)
-        .then(geojsons => {
+    fetch('data/geojson/' + filename)
+        .then(res => res.json())
+        .then(data => {
             clearGeoJsonLayer();
+            gpFeatures = data.features || [];
             
-            let combinedFeatures = [];
-            geojsons.forEach(data => {
-                if (data && data.features) {
-                    combinedFeatures = combinedFeatures.concat(data.features);
-                }
-            });
-            
-            gpFeatures = combinedFeatures;
-            
-            const combinedGeoJson = {
-                type: 'FeatureCollection',
-                features: combinedFeatures
-            };
-            
-            currentGeoJsonLayer = L.geoJSON(combinedGeoJson, {
+            currentGeoJsonLayer = L.geoJSON(data, {
                 style: styleFeature,
                 onEachFeature: onEachFeature
             }).addTo(map);
@@ -834,7 +658,7 @@ function styleFeature(feature) {
     // Check if any activity/crop/inputs filters are active
     const hasActivityFilter = activitySelect.value || 
                               cropTypeSelect.value || 
-                              (getSelectedNFInputs().length > 0);
+                              nfInputSelect.value;
                               
     if (hasActivityFilter) {
         const isMatched = matchFilters(feature);
@@ -913,19 +737,14 @@ function matchFilters(feature) {
         return false;
     }
     // 3. Crop Type filter
-    if (cropTypeSelect.value) {
-        const selectedCt = cropTypeSelect.value.toLowerCase();
-        const cts = props['Crop Type'].toLowerCase().split(',').map(x => x.trim());
-        if (!cts.includes(selectedCt)) {
-            return false;
-        }
+    if (cropTypeSelect.value && props['Crop Type'].toLowerCase() !== cropTypeSelect.value.toLowerCase()) {
+        return false;
     }
     // 5. NF Inputs applied filter (subset matching)
-    const selectedInps = getSelectedNFInputs();
-    if (selectedInps.length > 0) {
+    if (nfInputSelect.value) {
+        const inp_selected = nfInputSelect.value.toLowerCase();
         const inp_applied = props['NF Inputs'].toLowerCase();
-        const hasMatchingInput = selectedInps.some(inp => inp_applied.includes(inp.toLowerCase()));
-        if (!hasMatchingInput) {
+        if (!inp_applied.includes(inp_selected)) {
             return false;
         }
     }
@@ -958,22 +777,12 @@ function createPopupContent(props) {
                     <span class="font-bold text-[10px] text-gray-400 uppercase tracking-wider">Plot ID</span>
                     <span class="font-bold text-white break-all max-w-[70%] text-right">${props['Plot ID'] || 'N/A'}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div>
-                        <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Area</span>
-                        <span class="font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
-                    </div>
-                    <div>
-                        <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Season</span>
-                        <span class="font-semibold text-gray-200">${props['Season'] || 'N/A'}</span>
-                    </div>
-                </div>
                 <div>
-                    <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Year</span>
-                    <span class="font-semibold text-gray-200">${props['Year'] || 'N/A'}</span>
+                    <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider block">Area:</span>
+                    <span class="font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
                 </div>
                 <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-2 text-center mt-2">
-                    <span class="text-red-400 font-bold text-[10px] block">No Survey Data</span>
+                    <span class="color-red-400 font-bold text-[10px] block">No Survey Data</span>
                 </div>
             </div>
         `;
@@ -1122,24 +931,14 @@ function resetAttributePanel() {
 function displayAttributes(props) {
     if (!props.has_excel) {
         attributePanel.innerHTML = `
-            <div class="w-full text-left space-y-2.5">
+            <div class="w-full text-left space-y-3">
                 <div class="flex flex-wrap justify-between items-center gap-2 border-b border-white/5 pb-2">
                     <span class="text-[10px] font-bold text-gray-400 uppercase">Plot ID</span>
                     <span class="text-sm font-bold text-white bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20 break-all max-w-[70%] text-right">${props['Plot ID'] || 'N/A'}</span>
                 </div>
-                <div class="grid grid-cols-2 gap-3 pt-1">
-                    <div>
-                        <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Area</span>
-                        <span class="text-xs font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
-                    </div>
-                    <div>
-                        <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Season</span>
-                        <span class="text-xs font-semibold text-gray-200">${props['Season'] || 'N/A'}</span>
-                    </div>
-                </div>
-                <div>
-                    <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Year</span>
-                    <span class="text-xs font-semibold text-gray-200">${props['Year'] || 'N/A'}</span>
+                <div class="flex justify-between items-center">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase">Area</span>
+                    <span class="text-xs font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
                 </div>
                 <div class="p-3 bg-red-900/10 border border-red-500/20 rounded-xl mt-2 text-center">
                     <span class="text-red-400 font-bold text-xs block mb-0.5">No Survey Data</span>
