@@ -189,12 +189,11 @@
                 </select>
             </div>
 
-            <!-- NF Inputs (Dynamic) -->
+            <!-- NF Inputs (Dynamic Checkboxes) -->
             <div id="nfInputContainer" class="hidden">
                 <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Natural Farming Inputs</label>
-                <select id="nfInputSelect" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none focus:border-green-500/50 transition-colors duration-200 cursor-pointer">
-                    <option value="" class="bg-dark-900">Select Input</option>
-                </select>
+                <div id="nfInputCheckboxContainer" class="w-full max-h-40 overflow-y-auto bg-white/5 border border-white/10 rounded-xl p-3 text-xs text-white space-y-1.5 focus-within:border-green-500/50 transition-colors duration-200">
+                </div>
             </div>
 
             <!-- Crop Type Dropdown -->
@@ -312,7 +311,7 @@ const gpSelect = document.getElementById("gpSelect");
 const villageSelect = document.getElementById("villageSelect");
 const activitySelect = document.getElementById("activitySelect");
 const cropTypeSelect = document.getElementById("cropTypeSelect");
-const nfInputSelect = document.getElementById("nfInputSelect");
+const nfInputCheckboxContainer = document.getElementById("nfInputCheckboxContainer");
 
 const nfInputContainer = document.getElementById("nfInputContainer");
 const attributePanel = document.getElementById("attributePanel");
@@ -373,6 +372,7 @@ function populateNGOs() {
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
+    nfInputCheckboxContainer.innerHTML = "";
 }
 
 // Event handlers
@@ -392,11 +392,23 @@ ngoSelect.onchange = () => {
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
+    nfInputCheckboxContainer.innerHTML = "";
     clearGeoJsonLayer();
 };
 
 stateSelect.onchange = () => {
-    if (!stateSelect.value) return;
+    if (!stateSelect.value) {
+        resetOptions(districtSelect, "District");
+        resetOptions(blockSelect, "Block");
+        resetOptions(gpSelect, "GP");
+        resetOptions(villageSelect, "Village");
+        resetOptions(activitySelect, "Activity");
+        resetOptions(cropTypeSelect, "Crop Type");
+        nfInputContainer.classList.add("hidden");
+        nfInputCheckboxContainer.innerHTML = "";
+        clearGeoJsonLayer();
+        return;
+    }
     const districts = Object.keys(hierarchyData[ngoSelect.value][stateSelect.value]).sort();
     populateSelect(districtSelect, districts, "District");
     
@@ -406,11 +418,22 @@ stateSelect.onchange = () => {
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
+    nfInputCheckboxContainer.innerHTML = "";
     clearGeoJsonLayer();
 };
 
 districtSelect.onchange = () => {
-    if (!districtSelect.value) return;
+    if (!districtSelect.value) {
+        resetOptions(blockSelect, "Block");
+        resetOptions(gpSelect, "GP");
+        resetOptions(villageSelect, "Village");
+        resetOptions(activitySelect, "Activity");
+        resetOptions(cropTypeSelect, "Crop Type");
+        nfInputContainer.classList.add("hidden");
+        nfInputCheckboxContainer.innerHTML = "";
+        clearGeoJsonLayer();
+        return;
+    }
     const blocks = Object.keys(hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value]).sort();
     populateSelect(blockSelect, blocks, "Block");
     
@@ -419,11 +442,21 @@ districtSelect.onchange = () => {
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
+    nfInputCheckboxContainer.innerHTML = "";
     clearGeoJsonLayer();
 };
 
 blockSelect.onchange = () => {
-    if (!blockSelect.value) return;
+    if (!blockSelect.value) {
+        resetOptions(gpSelect, "GP");
+        resetOptions(villageSelect, "Village");
+        resetOptions(activitySelect, "Activity");
+        resetOptions(cropTypeSelect, "Crop Type");
+        nfInputContainer.classList.add("hidden");
+        nfInputCheckboxContainer.innerHTML = "";
+        clearGeoJsonLayer();
+        return;
+    }
     const gps = Object.keys(hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value][blockSelect.value]).sort();
     populateSelect(gpSelect, gps, "GP");
     
@@ -431,12 +464,19 @@ blockSelect.onchange = () => {
     resetOptions(activitySelect, "Activity");
     resetOptions(cropTypeSelect, "Crop Type");
     nfInputContainer.classList.add("hidden");
+    nfInputCheckboxContainer.innerHTML = "";
     clearGeoJsonLayer();
 };
 
 gpSelect.onchange = () => {
     if (!gpSelect.value) {
         clearGeoJsonLayer();
+        resetOptions(villageSelect, "Village");
+        resetOptions(activitySelect, "Activity");
+        resetOptions(cropTypeSelect, "Crop Type");
+        nfInputContainer.classList.add("hidden");
+        nfInputCheckboxContainer.innerHTML = "";
+        resetAttributePanel();
         return;
     }
     const gpData = hierarchyData[ngoSelect.value][stateSelect.value][districtSelect.value][blockSelect.value][gpSelect.value];
@@ -455,10 +495,72 @@ gpSelect.onchange = () => {
     villageSelect.value = "";
     activitySelect.value = "";
     cropTypeSelect.value = "";
-    nfInputSelect.value = "";
+    nfInputCheckboxContainer.innerHTML = "";
     
     updateFilterDropdowns();
 };
+
+function getSelectedNFInputs() {
+    const checkboxes = document.querySelectorAll(".nf-input-checkbox:checked");
+    return Array.from(checkboxes).map(cb => cb.value);
+}
+
+function populateNFInputCheckboxes(inps) {
+    nfInputCheckboxContainer.innerHTML = "";
+    if (inps.length === 0) {
+        nfInputCheckboxContainer.innerHTML = `<p class="text-gray-500 italic text-[11px]">No inputs available</p>`;
+        return;
+    }
+    
+    // Select All
+    const selectAllWrapper = document.createElement("label");
+    selectAllWrapper.className = "flex items-start space-x-2.5 py-1 px-1.5 rounded hover:bg-white/5 cursor-pointer transition-colors duration-150 border-b border-white/10 pb-1.5 mb-1.5";
+    
+    const selectAllCheckbox = document.createElement("input");
+    selectAllCheckbox.type = "checkbox";
+    selectAllCheckbox.id = "nfInputSelectAll";
+    selectAllCheckbox.className = "mt-0.5 rounded border-white/20 text-emerald-500 focus:ring-0 focus:ring-offset-0 bg-white/5 cursor-pointer";
+    
+    const selectAllLabel = document.createElement("span");
+    selectAllLabel.className = "text-xs font-bold text-gray-300 select-none leading-tight";
+    selectAllLabel.innerText = "Select All Inputs";
+    
+    selectAllWrapper.appendChild(selectAllCheckbox);
+    selectAllWrapper.appendChild(selectAllLabel);
+    nfInputCheckboxContainer.appendChild(selectAllWrapper);
+    
+    inps.forEach(inp => {
+        const wrapper = document.createElement("label");
+        wrapper.className = "flex items-start space-x-2.5 py-1 px-1.5 rounded hover:bg-white/5 cursor-pointer transition-colors duration-150 nf-input-checkbox-item";
+        
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.value = inp;
+        checkbox.className = "mt-0.5 rounded border-white/20 text-emerald-500 focus:ring-0 focus:ring-offset-0 bg-white/5 cursor-pointer nf-input-checkbox";
+        
+        checkbox.onchange = () => {
+            const allCheckboxes = nfInputCheckboxContainer.querySelectorAll(".nf-input-checkbox");
+            const checkedCheckboxes = nfInputCheckboxContainer.querySelectorAll(".nf-input-checkbox:checked");
+            selectAllCheckbox.checked = (allCheckboxes.length === checkedCheckboxes.length);
+            
+            filterAndStyleMap();
+        };
+        
+        const label = document.createElement("span");
+        label.className = "text-xs text-gray-200 select-none leading-tight";
+        label.innerText = "✓ " + inp;
+        
+        wrapper.appendChild(checkbox);
+        wrapper.appendChild(label);
+        nfInputCheckboxContainer.appendChild(wrapper);
+    });
+    
+    selectAllCheckbox.onchange = () => {
+        const allCheckboxes = nfInputCheckboxContainer.querySelectorAll(".nf-input-checkbox");
+        allCheckboxes.forEach(cb => cb.checked = selectAllCheckbox.checked);
+        filterAndStyleMap();
+    };
+}
 
 // Village filter trigger
 villageSelect.onchange = () => {
@@ -468,17 +570,13 @@ villageSelect.onchange = () => {
 // Activity filter trigger
 activitySelect.onchange = () => {
     cropTypeSelect.value = "";
-    nfInputSelect.value = "";
+    nfInputCheckboxContainer.innerHTML = "";
     updateFilterDropdowns();
 };
 
 cropTypeSelect.onchange = () => {
-    nfInputSelect.value = "";
+    nfInputCheckboxContainer.innerHTML = "";
     updateFilterDropdowns();
-};
-
-nfInputSelect.onchange = () => {
-    filterAndStyleMap();
 };
 
 // Dynamic Cascading Dropdown Populators
@@ -550,7 +648,7 @@ function updateFilterDropdowns() {
     const selectedVil = villageSelect.value;
     const selectedAct = activitySelect.value;
     const selectedCt = cropTypeSelect.value;
-    const selectedInp = nfInputSelect.value;
+    const selectedInps = getSelectedNFInputs();
     
     // 1. Update Activity
     const acts = getAvailableActivities();
@@ -569,17 +667,28 @@ function updateFilterDropdowns() {
         const inps = getAvailableNFInputs();
         if (inps.length > 0) {
             nfInputContainer.classList.remove("hidden");
-            populateSelect(nfInputSelect, inps, "Input");
-            if (inps.includes(selectedInp)) {
-                nfInputSelect.value = selectedInp;
+            populateNFInputCheckboxes(inps);
+            
+            // Restore selections if possible
+            const checkboxes = nfInputCheckboxContainer.querySelectorAll(".nf-input-checkbox");
+            let checkedCount = 0;
+            checkboxes.forEach(cb => {
+                if (selectedInps.includes(cb.value)) {
+                    cb.checked = true;
+                    checkedCount++;
+                }
+            });
+            const selectAllCheckbox = document.getElementById("nfInputSelectAll");
+            if (selectAllCheckbox) {
+                selectAllCheckbox.checked = (checkboxes.length === checkedCount && checkboxes.length > 0);
             }
         } else {
             nfInputContainer.classList.add("hidden");
-            nfInputSelect.value = "";
+            nfInputCheckboxContainer.innerHTML = "";
         }
     } else {
         nfInputContainer.classList.add("hidden");
-        nfInputSelect.value = "";
+        nfInputCheckboxContainer.innerHTML = "";
     }
     
     // Render styles based on new filter combination
@@ -658,7 +767,7 @@ function styleFeature(feature) {
     // Check if any activity/crop/inputs filters are active
     const hasActivityFilter = activitySelect.value || 
                               cropTypeSelect.value || 
-                              nfInputSelect.value;
+                              (getSelectedNFInputs().length > 0);
                               
     if (hasActivityFilter) {
         const isMatched = matchFilters(feature);
@@ -737,14 +846,19 @@ function matchFilters(feature) {
         return false;
     }
     // 3. Crop Type filter
-    if (cropTypeSelect.value && props['Crop Type'].toLowerCase() !== cropTypeSelect.value.toLowerCase()) {
-        return false;
+    if (cropTypeSelect.value) {
+        const selectedCt = cropTypeSelect.value.toLowerCase();
+        const cts = props['Crop Type'].toLowerCase().split(',').map(x => x.trim());
+        if (!cts.includes(selectedCt)) {
+            return false;
+        }
     }
     // 5. NF Inputs applied filter (subset matching)
-    if (nfInputSelect.value) {
-        const inp_selected = nfInputSelect.value.toLowerCase();
+    const selectedInps = getSelectedNFInputs();
+    if (selectedInps.length > 0) {
         const inp_applied = props['NF Inputs'].toLowerCase();
-        if (!inp_applied.includes(inp_selected)) {
+        const hasMatchingInput = selectedInps.some(inp => inp_applied.includes(inp.toLowerCase()));
+        if (!hasMatchingInput) {
             return false;
         }
     }
@@ -777,12 +891,22 @@ function createPopupContent(props) {
                     <span class="font-bold text-[10px] text-gray-400 uppercase tracking-wider">Plot ID</span>
                     <span class="font-bold text-white break-all max-w-[70%] text-right">${props['Plot ID'] || 'N/A'}</span>
                 </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Area</span>
+                        <span class="font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
+                    </div>
+                    <div>
+                        <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Season</span>
+                        <span class="font-semibold text-gray-200">${props['Season'] || 'N/A'}</span>
+                    </div>
+                </div>
                 <div>
-                    <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider block">Area:</span>
-                    <span class="font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
+                    <span class="text-[8px] text-gray-400 font-bold uppercase tracking-wider block">Year</span>
+                    <span class="font-semibold text-gray-200">${props['Year'] || 'N/A'}</span>
                 </div>
                 <div class="bg-red-500/10 border border-red-500/20 rounded-lg p-2 text-center mt-2">
-                    <span class="color-red-400 font-bold text-[10px] block">No Survey Data</span>
+                    <span class="text-red-400 font-bold text-[10px] block">No Survey Data</span>
                 </div>
             </div>
         `;
@@ -931,14 +1055,24 @@ function resetAttributePanel() {
 function displayAttributes(props) {
     if (!props.has_excel) {
         attributePanel.innerHTML = `
-            <div class="w-full text-left space-y-3">
+            <div class="w-full text-left space-y-2.5">
                 <div class="flex flex-wrap justify-between items-center gap-2 border-b border-white/5 pb-2">
                     <span class="text-[10px] font-bold text-gray-400 uppercase">Plot ID</span>
                     <span class="text-sm font-bold text-white bg-blue-500/10 px-2.5 py-0.5 rounded-full border border-blue-500/20 break-all max-w-[70%] text-right">${props['Plot ID'] || 'N/A'}</span>
                 </div>
-                <div class="flex justify-between items-center">
-                    <span class="text-[10px] font-bold text-gray-400 uppercase">Area</span>
-                    <span class="text-xs font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
+                <div class="grid grid-cols-2 gap-3 pt-1">
+                    <div>
+                        <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Area</span>
+                        <span class="text-xs font-semibold text-gray-200">${props['Area'] || '0.00'} Hectares</span>
+                    </div>
+                    <div>
+                        <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Season</span>
+                        <span class="text-xs font-semibold text-gray-200">${props['Season'] || 'N/A'}</span>
+                    </div>
+                </div>
+                <div>
+                    <span class="block text-[9px] font-bold text-gray-400 uppercase tracking-wider">Year</span>
+                    <span class="text-xs font-semibold text-gray-200">${props['Year'] || 'N/A'}</span>
                 </div>
                 <div class="p-3 bg-red-900/10 border border-red-500/20 rounded-xl mt-2 text-center">
                     <span class="text-red-400 font-bold text-xs block mb-0.5">No Survey Data</span>
